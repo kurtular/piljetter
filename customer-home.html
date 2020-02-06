@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://kit.fontawesome.com/d696902dc9.js" crossorigin="anonymous"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="shortcut icon" href="/img/icon.png" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css?family=Fugaz+One|Lato|Nova+Flat|Sofia&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/c-h.css">
+    <title>hemsida</title>
+</head>
+<body>
+    <nav>
+        <div><a href=""><img src="img/logo.png"></a></div>
+        <a href="" id="selected">Hem</a>
+        <a href="">Köpa pesetas</a>
+        <a href="">Profil</a>
+    </nav>
+    <main>
+        <div class="concert">
+            <div class="artist">artist</div>
+            <div class="address">plats</div>
+            <div class="date">date</div>
+            <div class="price">price</div>
+            <div class="amount">remmaining tickets amount</div>
+        </div>
+        <div class="concert">
+            <div class="artist">artist</div>
+            <div class="address">plats</div>
+            <div class="date">2010/10/05</div>
+            <div class="price">1000</div>
+            <div class="amount">15</div>
+        </div>
+        <div class="concert">
+            <div class="artist">artist</div>
+            <div class="address">plats</div>
+            <div class="date">date</div>
+            <div class="price">price</div>
+            <div class="amount">remmaining tickets amount</div>
+        </div>
+        <div class="concert">
+            <div class="artist">artist</div>
+            <div class="address">plats</div>
+            <div class="date">2010/10/05</div>
+            <div class="price">1000</div>
+            <div class="amount">15</div>
+        </div>
+        <div class="concert">
+            <div class="artist">artist</div>
+            <div class="address">plats</div>
+            <div class="date">date</div>
+            <div class="price">price</div>
+            <div class="amount">remmaining tickets amount</div>
+        </div>
+        <div class="concert">
+            <div class="artist">artist</div>
+            <div class="address">plats</div>
+            <div class="date">2010/10/05</div>
+            <div class="price">1000</div>
+            <div class="amount">15</div>
+        </div>
+    </main>
+</body>
+<script>
+function addIcons(className,iconTag){
+    var elements = document.querySelectorAll("."+className);
+    elements.forEach(element => {
+        element.innerHTML = iconTag + element.innerHTML;
+        });
+}
+
+addIcons('artist','<i class="fas fa-microphone-alt"></i>');
+addIcons('address','<i class="fas fa-map-marker-alt"></i>');
+addIcons('date','<i class="far fa-calendar-alt" aria-hidden="true"></i>');
+addIcons('price','<i class="far fa-money-bill-alt"></i>');
+addIcons('amount','<i class="fas fa-ticket-alt"></i>');
+
+</script>
+</html>

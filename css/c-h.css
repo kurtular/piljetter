@@ -1,0 +1,72 @@
+/*
+    font-family: 'Lato', sans-serif;
+    font-family: 'Nova Flat', cursive;
+    font-family: 'Fugaz One', cursive;
+    font-family: 'Sofia', cursive;*/
+*{
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+}
+html,body{
+    width: 100%;
+    height: 100%;
+}
+body{
+    background: #1c1c1c;
+}
+nav{
+    background:#1a1a1a;
+    display: flex;
+    align-items: center;
+    padding: 0 100px;
+    font-family: 'Fugaz One', cursive;
+}
+nav > *{
+    float: left;
+}
+nav >a{
+    display: inline-block;
+    position: relative;
+    padding: 30px;
+    text-decoration: none;
+    color: #ff2da9;
+}
+nav a:hover{
+    color:#2ce4ff;
+}
+
+nav img{
+    height:50px;
+}
+#selected{
+    border-bottom: 3px solid #2ce4ff;
+}
+main{
+    color: #fff;
+    padding:1vw 0;
+    width: 90%;
+    margin: 0 auto ;
+    border-left:3px solid #ff2da9;
+    border-right:3px solid #ff2da9;
+    background-color: #1f1f1f;
+    text-align: center;
+}
+.concert{
+    border: 3px solid #2ce4ff;
+    display: inline-block;
+    padding: 1vw;
+    margin:5px;
+    min-width: 15vw;
+    font-size: 2vh;
+    font-family: 'Nova Flat', cursive;
+    text-align: left;
+}
+.artist{
+    font-family: 'Sofia', cursive;
+}
+.concert i{
+    width: 30px;
+    font-size: small;
+    text-align: center;
+}
