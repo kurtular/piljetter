@@ -72,13 +72,13 @@ outline: none;
     color: #ff2da9;
     border:2px solid#2ce4ff;
 }
-#login_form span{
+#login_form a{
     float:right;
-    color: #fff;
     margin-bottom: -10px;
     color:#ff2da9;
+    text-decoration: none;
 }
-#login_form span:hover{
+#login_form a:hover{
     color:#2ce4ff;
     cursor: pointer;
 }
