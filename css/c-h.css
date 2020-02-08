@@ -21,11 +21,12 @@ nav{
     align-items: center;
     padding: 0 100px;
     font-family: 'Fugaz One', cursive;
+    user-select: none;
 }
 nav > *{
     float: left;
 }
-nav >a{
+nav > a{
     display: inline-block;
     position: relative;
     padding: 30px;
@@ -39,9 +40,39 @@ nav a:hover{
 nav img{
     height:50px;
 }
-#selected{
+#profile{
+    margin-left:auto;
+    display: flex;
+    flex-direction: row;
+    padding: 22px;
+}
+#profile div{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+#profile>div>p:last-child{
+    font-size: small;
+    color: #2ce4ff;
+}
+#profile > div > p:last-child:after{
+    font-size: xx-small;
+    content: " Pp";
+}
+#profile::before{
+content: '\f2bd'; 
+font-family: "Font Awesome 5 Free";
+font-size: x-large;
+display: inline-block;
+text-align: center;
+margin: auto;
+margin-right:10px ;
+}
+.selected{
     border-bottom: 3px solid #2ce4ff;
 }
+
+/**Page Content**/
 main{
     color: #fff;
     padding:1vw 0;
@@ -51,6 +82,7 @@ main{
     border-right:3px solid #ff2da9;
     background-color: #1f1f1f;
     text-align: center;
+    min-height: 80%;
 }
 .concert{
     border: 3px solid #2ce4ff;
@@ -61,12 +93,123 @@ main{
     font-size: 2vh;
     font-family: 'Nova Flat', cursive;
     text-align: left;
+    user-select: none;
+    width: 24%;/*responsive*/
+}
+.concert div:nth-child(5){
+    display: inline-block;
 }
 .artist{
     font-family: 'Sofia', cursive;
 }
-.concert i{
-    width: 30px;
-    font-size: small;
+.addToCart{
+    float: right;
+    padding: 3px;
+    border: 1px solid #2ce4ff;
+    font-weight: 600;
+    cursor: pointer;
+    color: #2ce4ff;
+    display: inline-block;
+    font-size: large !important;
+}
+.addToCart:hover{
+    border: 1px solid #ff2da9;
+    color: #ff2da9;
+}
+/*footer styling*/
+footer{
+    background-color: #1a1a1a;
+    padding: 2vh 0;
     text-align: center;
+}
+footer>div{
+    display: inline-table;
+    height: 100%;
+    margin:0  20px;
+    text-align: left;
+    color: #ff2da9;
+}
+footer>div:last-child{
+    padding: 10px;
+    display: block;
+    text-align: center;
+}
+footer h3{
+    margin-bottom: 5px;
+    color: #ff2da9;
+    font-family: 'Fugaz One', cursive;
+    font-weight: unset;
+}
+footer div:first-child>div{
+text-align: center;
+}
+footer img{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: inline-block;
+    border: 2px solid #2ce4ff;
+    margin: 0 5px;
+}
+footer p{
+    color: #2ce4ff;
+}
+
+/*icons before texts*/
+:before{
+    font-family: "Font Awesome 5 Free";
+    display: inline-block;
+    width: 30px;
+    text-align: center;
+    vertical-align: middle;
+}
+main div::before{
+    font-size: small;
+}
+.artist::before{
+    content: '\f3c9';
+    font-weight:600;
+}
+.address:before{
+    content: '\f3c5'; 
+    font-weight:600;
+}
+.date:before{
+    content: '\f073'; 
+}
+.price:before{
+    content: '\f3d1'; 
+}
+.amount:before{
+    content: '\f3ff';
+    font-weight:600; 
+}
+.chat:before{
+    content: '\f086'; 
+}
+.code:before{
+    content: '\f121';
+    font-weight:600;  
+}
+.code-branch:before{
+    content: '\f126';
+    font-weight:600; 
+}
+.phone:before{
+    content: '\f3cd'; 
+    font-weight:600; 
+}
+.copy-rights:before{
+    content: '\f1f9'; 
+}
+.mail:before{
+    content: '\f1fa'; 
+    font-weight:600; 
+}
+.home:before{
+    content: '\f015';
+    font-weight:600;  
+}
+.person:before{
+    content: '\f2bb';
 }

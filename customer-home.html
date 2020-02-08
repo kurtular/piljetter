@@ -1,21 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="shortcut icon" href="/img/icon.png" type="image/x-icon">
-    <script src="https://kit.fontawesome.com/d696902dc9.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
     <link href="https://fonts.googleapis.com/css?family=Fugaz+One|Lato|Nova+Flat|Sofia&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/css/c-h.css">
     <title>hemsida</title>
 </head>
+
 <body>
     <nav>
         <div><a href=""><img src="img/logo.png"></a></div>
-        <a href="" id="selected">Hem</a>
-        <a href="">Köpa pesetas</a>
-        <a href="">Profil</a>
+        <a href="" class="selected">Hem</a>
+        <a href="" id="profile">
+            <div>
+                <p>Profil</p>
+                <p>21</p>
+            </div>
+        </a>
     </nav>
     <main>
         <div class="concert">
@@ -24,13 +30,7 @@
             <div class="date">date</div>
             <div class="price">price</div>
             <div class="amount">remmaining tickets amount</div>
-        </div>
-        <div class="concert">
-            <div class="artist">artist</div>
-            <div class="address">plats</div>
-            <div class="date">2010/10/05</div>
-            <div class="price">1000</div>
-            <div class="amount">15</div>
+            <i class="fas fa-cart-plus addToCart"></i>
         </div>
         <div class="concert">
             <div class="artist">artist</div>
@@ -38,13 +38,7 @@
             <div class="date">date</div>
             <div class="price">price</div>
             <div class="amount">remmaining tickets amount</div>
-        </div>
-        <div class="concert">
-            <div class="artist">artist</div>
-            <div class="address">plats</div>
-            <div class="date">2010/10/05</div>
-            <div class="price">1000</div>
-            <div class="amount">15</div>
+            <i class="fas fa-cart-plus addToCart"></i>
         </div>
         <div class="concert">
             <div class="artist">artist</div>
@@ -52,29 +46,53 @@
             <div class="date">date</div>
             <div class="price">price</div>
             <div class="amount">remmaining tickets amount</div>
+            <i class="fas fa-cart-plus addToCart"></i>
         </div>
         <div class="concert">
             <div class="artist">artist</div>
             <div class="address">plats</div>
-            <div class="date">2010/10/05</div>
-            <div class="price">1000</div>
-            <div class="amount">15</div>
+            <div class="date">date</div>
+            <div class="price">price</div>
+            <div class="amount">remmaining tickets amount</div>
+            <i class="fas fa-cart-plus addToCart"></i>
+        </div>
+        <div class="concert">
+            <div class="artist">artist</div>
+            <div class="address">plats</div>
+            <div class="date">date</div>
+            <div class="price">price</div>
+            <div class="amount">remmaining tickets amount</div>
+            <i class="fas fa-cart-plus addToCart"></i>
+        </div>
+        <div class="concert">
+            <div class="artist">artist</div>
+            <div class="address">plats</div>
+            <div class="date">date</div>
+            <div class="price">price</div>
+            <div class="amount">remmaining tickets amount</div>
+            <i class="fas fa-cart-plus addToCart"></i>
         </div>
     </main>
+    <footer>
+        <div>
+            <h3 class="code-branch">Utvecklad av</h3>
+            <div>
+                <img src="/img/bild1.jpg" alt="">
+                <img src="/img/bild2.jpg" alt="">
+            </div>
+            </div>
+            <div>
+                <h3 class="code">Utvecklare</h3>
+                    <p class="person">Henrik Larsson</p>
+                    <p class="person">Mohammad Ahmad</p>
+        </div>
+        <div>
+            <h3 class="chat">Kontakt</h3>
+            <p class="home">Krokslätts Fabriker 12A , 431 37 Mölndal</p>
+            <p class="mail">demo@piljetter.se</p>
+            <p class="phone">0762000000</p>
+        </div>
+        <div class="copy-rights">Piljetter.se  | 2020 <br>All rights reserved.</div>
+    </footer>
 </body>
-<script>
-function addIcons(className,iconTag){
-    var elements = document.querySelectorAll("."+className);
-    elements.forEach(element => {
-        element.innerHTML = iconTag + element.innerHTML;
-        });
-}
-
-addIcons('artist','<i class="fas fa-microphone-alt"></i>');
-addIcons('address','<i class="fas fa-map-marker-alt"></i>');
-addIcons('date','<i class="far fa-calendar-alt" aria-hidden="true"></i>');
-addIcons('price','<i class="far fa-money-bill-alt"></i>');
-addIcons('amount','<i class="fas fa-ticket-alt"></i>');
-
-</script>
 </html>
