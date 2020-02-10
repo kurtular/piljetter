@@ -46,7 +46,6 @@ margin: 20px auto;
 font-family: cursive;
 font-size: 1.2vw;
 user-select: none;
--moz-user-focus: none;
 -webkit-user-drag: none;
 }
 form:nth-child(2){display:none;}
@@ -59,7 +58,6 @@ outline: none;
 #login_form input,#reg_form input{
     width: 90%;
     padding: 5px 10px;
-    border: none;
     background-color: #1f1f1f;
 }
 
