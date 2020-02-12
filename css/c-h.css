@@ -39,7 +39,9 @@ nav a:hover{
 }
 
 nav img{
-    height:50px;
+    margin-top: 3vh;
+    height:125px;
+    margin-left: 46em;
 }
 #profile{
     margin-left:auto;
@@ -68,6 +70,13 @@ display: inline-block;
 text-align: center;
 margin: auto;
 margin-right:10px ;
+}
+[class='fas fa-sign-out-alt'] {
+    color: #ff2da9;
+    font-size: 2vw;
+}
+[class='fas fa-sign-out-alt']:hover {
+    color: #2ce4ff;
 }
 .selected{
     border-bottom: 3px solid #2ce4ff;

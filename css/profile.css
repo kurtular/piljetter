@@ -38,7 +38,9 @@
     }
     
     nav img{
-        height:50px;
+        margin-top: 3vh;
+        height:125px;
+        margin-left: 46em;
     }
     #profile{
         margin-left:auto;
@@ -67,6 +69,13 @@
     text-align: center;
     margin: auto;
     margin-right:10px ;
+    }
+    [class='fas fa-sign-out-alt'] {
+        color: #ff2da9;
+        font-size: 2vw;
+    }
+    [class='fas fa-sign-out-alt']:hover {
+        color: #2ce4ff;
     }
     .selected{
         border-bottom: 3px solid #2ce4ff;
@@ -254,12 +263,27 @@
     .used:before{
         content: '\f14a';
     }
-    #coins{
-        font-size: 5vw;
+    
+
+    #coins *{
+        font-size: 2vw;
         margin-right: -66vw;
-        color: gold;
+        color: #2ce4ff;
+        text-decoration: none;
         
     }
+    
+    #coins p:hover{
+        color: #ff2da9;
+    }
+    [class='fas fa-coins']{
+        font-size: 4vw;
+        margin-right: -70vw;
+        color: #2ce4ff;
+        text-decoration: none;
+        
+    }
+    
     
     
     
