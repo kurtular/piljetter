@@ -75,5 +75,5 @@ IF (new_voucher_id >0 AND get_ticket_id <> NULL)  THEN INSERT INTO voucher_ticke
 
 END IF;
 END;
- RETURN $$
+ $$
 LANGUAGE 'plpgsql';
