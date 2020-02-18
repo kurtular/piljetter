@@ -1,24 +1,56 @@
+<?php
+session_start();
+if(isset($_GET['signout'])){
+    session_destroy();
+}
+
+if(isset($_SESSION['userId'])){
+    header("location:index.php");
+}
+
+if(isset($_POST['submit'])){
+$userName = $_POST['username'];
+$password = $_POST['password'];
+require 'php-parts/db-connection.php';
+$sql= "SELECT user_id FROM users WHERE user_name='$userName' AND password='$password'";
+$stmt = $conn->prepare($sql);
+$stmt->execute();
+while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
+    $_SESSION['userId'] = $row['user_id'];
+    header("location:index.php");
+}
+if(!isset($_SESSION['userId'])){
+$msg ="!! Felaktig användarnamn eller lösenord. !!";}
+}
+
+//todo rigestering
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="shortcut icon" href="/img/icon.png" type="image/x-icon">
+    <link rel="shortcut icon" href="img/icon.png" type="image/x-icon">
     <link href="https://fonts.googleapis.com/css?family=Fugaz+One|Lato|Nova+Flat|Sofia&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/css/login.css">
+    <link rel="stylesheet" href="css/login.css">
     <title>Inloggning</title>
 </head>
 <body>
-    <form  id="login_form">
-        <img src="/img/logo.png">
+    <form  id="login_form" method="POST">
+        <img src="img/logo.png">
         <input type="text" name="username" placeholder="Användarnamn" required autocomplete="off">
         <input type="password" name="password" placeholder="Lösenord" required autocomplete="off">
         <button name="submit" type="submit" value="login">Logga in</button>
+        <?php
+        if(isset($msg)){
+            echo "<h5 id='msg'>".$msg."</h5>";
+        }
+        ?>
         <span onclick="show('reg')">Skapa ett konto</span>
     </form>
-    <form id="reg_form">
-        <img src="/img/logo.png">
+    <form id="reg_form" method="POST">
+        <img src="img/logo.png">
         <div>
         <div>
             <label for="firstname"><b>Förnamn</b></label>
@@ -52,5 +84,6 @@
 <button name=registrate type="submit" value="registrate">Registrera</button>
 <span onclick='show("log")'>Logga in</span>
 </form>
-</body><script src="/js/login.js"></script>
+</body>
+<script src="js/login.js"></script>
 </html>

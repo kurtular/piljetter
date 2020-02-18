@@ -88,5 +88,5 @@ CREATE TABLE voucher_tickets (
 );
 CREATE TABLE wallets (
     user_id int primary key CHECK (user_id>0) NOT NULL REFERENCES users(user_id),
-    balance int DEFAULT 50 NOT NULL CHECK (balance>=0)
+    balance int DEFAULT 25 NOT NULL CHECK (balance>=0)
 );

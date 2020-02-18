@@ -1,29 +1,21 @@
+<?php
+require 'php-parts/login-check.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="shortcut icon" href="/img/icon.png" type="image/x-icon">
+    <link rel="shortcut icon" href="img/icon.png" type="image/x-icon">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
     <link href="https://fonts.googleapis.com/css?family=Fugaz+One|Lato|Nova+Flat|Sofia&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/css/c-h.css">
-    <script src="/js/c-h.js"></script>
+    <link rel="stylesheet" href="css/c-h.css">
+    <script src="js/c-h.js"></script>
     <title>hemsida</title>
 </head>
-
 <body>
-    <nav>
-        <div><a href="/customer-home.html"><img src="img/logo.png"></a></div>
-        
-        <a href="/profile.html" id="profile">
-            <div>
-                <p>Profil</p>
-                <p>21</p>
-            </div>
-        </a>
-        <a href= /login.html><i class="fas fa-sign-out-alt"></i></a>
-    </nav>
+    <?php require 'html-parts/nav.html';?>
     <main>
         <header>
             <div id="search-bar">
@@ -64,27 +56,7 @@
             <i class="fas fa-cart-plus addToCart"></i>
         </div>
     </main>
-    <footer>
-        <div>
-            <h3 class="code-branch">Utvecklad av</h3>
-            <div>
-                <img src="/img/bild1.jpg" alt="">
-                <img src="/img/bild2.jpg" alt="">
-            </div>
-        </div>
-        <div>
-            <h3 class="code">Utvecklare</h3>
-            <p class="person">Henrik Larsson</p>
-            <p class="person">Mohammad Ahmad</p>
-        </div>
-        <div>
-            <h3 class="chat">Kontakt</h3>
-            <p class="home">Krokslätts Fabriker 12A , 431 37 Mölndal</p>
-            <p class="mail">demo@piljetter.se</p>
-            <p class="phone">0762000000</p>
-        </div>
-        <div class="copy-rights">Piljetter.se | 2020 <br>All rights reserved.</div>
-    </footer>
+    <?php include 'html-parts/footer.html';?>
     <a id="toTop" href="#"><i class="fas fa-arrow-up" aria-hidden="true"></i></a>
 </body>
 </html>
