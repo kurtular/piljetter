@@ -106,19 +106,42 @@ DECLARE get_expire_date date ;
 BEGIN
 actual_ticket_price = ticket_price FROM concerts WHERE concerts.concert_id = new_concert_id;
 get_wallet_balance = balance FROM wallets WHERE wallets.user_id = new_user_id;
-used_voucher = used FROM vouchers WHERE vouchers.voucher_id = new_voucher_id;
+IF NOT EXISTS (SELECT * FROM voucher_tickets WHERE voucher_id =new_voucher_id) THEN used_voucher = 'false'; 
+END IF;
 get_expire_date = expire_date FROM vouchers WHERE  vouchers.voucher_id = new_voucher_id;
 IF (new_voucher_id = 0 AND get_wallet_balance >= actual_ticket_price OR
 new_voucher_id>0 AND used_voucher = 'false'  AND get_expire_date >= CURRENT_DATE)  THEN
 INSERT INTO tickets (concert_id, user_id) VALUES (new_concert_id, new_user_id) returning ticket_id INTO get_ticket_id;
 END IF;
-
-
-IF (new_voucher_id = 0 AND get_ticket_id <> NULL) THEN INSERT INTO pesetas_tickets (ticket_id) VALUES (get_ticket_id);
+IF (new_voucher_id =0 AND get_ticket_id IS NOT NULL) THEN INSERT INTO pesetas_tickets (ticket_id) VALUES (get_ticket_id);
 END IF;
-IF (new_voucher_id >0 AND get_ticket_id <> NULL)  THEN INSERT INTO voucher_tickets (ticket_id,voucher_id) VALUES (get_ticket_id,new_voucher_id);
-
+IF (new_voucher_id =0 AND get_ticket_id IS NOT NULL) THEN UPDATE wallets set balance = balance-actual_ticket_price WHERE wallets.user_id = new_user_id;
+END IF;
+IF (new_voucher_id >0 AND get_ticket_id IS NOT NULL)  THEN INSERT INTO voucher_tickets (ticket_id,voucher_id) VALUES (get_ticket_id,new_voucher_id);
 END IF;
 END;
+ 
  $$
+LANGUAGE 'plpgsql';
+
+CREATE FUNCTION  total_tickets_in_period(IN from_date timestamp(6) without time zone,IN to_date timestamp(6) without time zone)
+RETURNS integer AS $$
+DECLARE total_tickets integer;
+BEGIN
+total_tickets =  count(*)  from tickets  where purchase_date > from_date AND purchase_date < to_date;
+RETURN total_tickets;
+END;
+$$
+LANGUAGE 'plpgsql';
+
+CREATE FUNCTION  total_income_in_period(IN from_date timestamp(6) without time zone,IN to_date timestamp(6) without time zone)
+RETURNS integer AS $$
+DECLARE total_income integer;
+BEGIN
+total_income = SUM(total) FROM
+(SELECT  count(*),concerts.ticket_price, count(*)*concerts.ticket_price AS total  from tickets, concerts where purchase_date > from_date AND
+ purchase_date < to_date
+AND concerts.concert_id = tickets.concert_id GROUP BY ticket_price) as sum_total_income;
+RETURN total_income;
+END; $$
 LANGUAGE 'plpgsql';
