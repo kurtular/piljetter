@@ -82,7 +82,7 @@ $$ LANGUAGE plpgsql;
 CREATE TRIGGER refund_new_vouchers_tr AFTER UPDATE OF cancelled ON concerts
 FOR EACH ROW EXECUTE PROCEDURE refund_new_vouchers();
 
-
+/*HENRIK*/
 CREATE FUNCTION  create_user(IN new_username varchar, IN new_password varchar, IN new_first_name varchar, IN new_last_name varchar, IN new_email varchar)
 RETURNS VOID AS $$
 DECLARE get_user_id integer;

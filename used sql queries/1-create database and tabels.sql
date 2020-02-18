@@ -28,8 +28,8 @@ CREATE TABLE scenes (
 );
 CREATE TABLE concerts (
     concert_id serial primary key CHECK (concert_id>0),
-    artist_id int REFERENCES artists(artist_id),
-    scene_id int REFERENCES scenes(scene_id),
+    artist_id int NOT NULL REFERENCES artists(artist_id),
+    scene_id int NOT NULL REFERENCES scenes(scene_id),
     date date NOT NULL CHECK(date > current_date),
     time time NOT NULL,
     spending int CHECK (spending>0),
@@ -54,39 +54,39 @@ CREATE TABLE users (
 );
 CREATE TABLE pesetas_charging (
     reg_id serial primary key CHECK (reg_id>0),
-    user_id int REFERENCES users(user_id),
+    user_id int NOT NULL REFERENCES users(user_id),
     deposit_sek int NOT NULL check (deposit_sek>0),
     "time" timestamp NOT NULL DEFAULT now(),
     amount_pesetas int check (amount_pesetas>0)
 );
 CREATE TABLE tickets (
     ticket_id serial primary key CHECK (ticket_id>0),
-    concert_id int REFERENCES concerts(concert_id),
-    user_id int REFERENCES users(user_id),
+    concert_id int NOT NULL REFERENCES concerts(concert_id),
+    user_id int NOT NULL REFERENCES users(user_id),
     purchase_date timestamp NOT NULL DEFAULT now()
 );
 CREATE TABLE re_pesetas_tickets (
     reg_id serial primary key CHECK (reg_id>0),
-    ticket_id int UNIQUE REFERENCES tickets(ticket_id),
+    ticket_id int UNIQUE NOT NULL REFERENCES tickets(ticket_id),
     "time" timestamp NOT NULL DEFAULT now()
 );
 CREATE TABLE pesetas_tickets (
     reg_id serial primary key CHECK (reg_id>0),
-    ticket_id int UNIQUE REFERENCES tickets(ticket_id)
+    ticket_id int UNIQUE NOT NULL REFERENCES tickets(ticket_id)
 );
 CREATE TABLE vouchers (
     voucher_id serial primary key CHECK (voucher_id>0),
-    user_id int REFERENCES users(user_id),
-    expire_date date NOT NULL check(issued_date<expire_date) DEFAULT (current_date+183),
-    issued_date date NOT NULL check(issued_date<expire_date) DEFAULT current_date,
+    user_id int NOT NULL REFERENCES users(user_id),
+    issued_date date NOT NULL DEFAULT current_date,
+    expire_date date NOT NULL check(expire_date>issued_date) DEFAULT (current_date+183),
     used boolean DEFAULT false NOT NULL
 );
 CREATE TABLE voucher_tickets (
     reg_id serial primary key CHECK (reg_id>0),
-    ticket_id int UNIQUE REFERENCES tickets(ticket_id),
-    voucher_id int UNIQUE REFERENCES vouchers(voucher_id)
+    ticket_id int UNIQUE NOT NULL REFERENCES tickets(ticket_id),
+    voucher_id int UNIQUE NOT NULL REFERENCES vouchers(voucher_id)
 );
 CREATE TABLE wallets (
-    user_id int primary key CHECK (user_id>0) REFERENCES users(user_id),
+    user_id int primary key CHECK (user_id>0) NOT NULL REFERENCES users(user_id),
     balance int DEFAULT 50 NOT NULL CHECK (balance>=0)
 );
