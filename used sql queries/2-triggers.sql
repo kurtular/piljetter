@@ -38,6 +38,51 @@ $$ language plpgsql;
 CREATE TRIGGER decrease_remaining_tickets AFTER INSERT ON tickets
 for each row execute procedure decrease_concert_remaining_tickets();
 
+/**/
+CREATE FUNCTION create_re_pesetas_tickets()
+RETURNS TRIGGER AS $$
+BEGIN
+IF NEW.cancelled = true THEN
+INSERT INTO re_pesetas_tickets (ticket_id)SELECT ticket_id from pesetas_tickets WHERE ticket_id IN (SELECT ticket_id FROM tickets WHERE concert_id = NEW.concert_id);
+END IF;
+return null;
+END;
+$$ LANGUAGE plpgsql;
+--
+CREATE TRIGGER re_pesetas_tickets_tr AFTER UPDATE OF cancelled ON concerts
+FOR EACH ROW EXECUTE PROCEDURE create_re_pesetas_tickets();
+
+/**/
+CREATE FUNCTION refund_pesetas()
+RETURNS TRIGGER AS $$
+declare
+concertId integer := (SELECT concert_id FROM tickets where ticket_id=NEW.ticket_id);
+userID integer:= (SELECT user_id FROM tickets where ticket_id=NEW.ticket_id);
+ticketPrice integer:= (SELECT ticket_price FROM concerts where concert_id=concertId);
+BEGIN
+UPDATE wallets set balance = (balance+ticketPrice) where user_id=userID;
+return null;
+END;
+$$ LANGUAGE plpgsql;
+--
+CREATE TRIGGER refund_pesetas_tr AFTER INSERT ON re_pesetas_tickets
+FOR EACH ROW EXECUTE PROCEDURE refund_pesetas();
+
+/**/
+CREATE FUNCTION refund_new_vouchers()
+RETURNS TRIGGER AS $$
+BEGIN
+IF NEW.cancelled = true THEN
+INSERT INTO vouchers (user_id) SELECT user_id FROM tickets WHERE concert_id=NEW.concert_id AND ticket_id IN (SELECT ticket_id FROM voucher_tickets);
+END IF;
+return null;
+END;
+$$ LANGUAGE plpgsql;
+--
+CREATE TRIGGER refund_new_vouchers_tr AFTER UPDATE OF cancelled ON concerts
+FOR EACH ROW EXECUTE PROCEDURE refund_new_vouchers();
+
+/*Henrik*/
 CREATE FUNCTION  create_user(IN new_username varchar, IN new_password varchar, IN new_first_name varchar, IN new_last_name varchar, IN new_email varchar)
 RETURNS VOID AS $$
 DECLARE get_user_id integer;
