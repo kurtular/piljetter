@@ -1,11 +1,9 @@
 create database piljetter;
 CREATE TABLE artists (
     artist_id serial primary key CHECK(artist_id >0),
-    first_name varchar(50) NOT NULL,
-    last_name varchar(50) NOT NULL,
+    name varchar(50) NOT NULL,
     popularity smallint NOT NULL,
-    CONSTRAINT artists_popularity_check CHECK ((popularity <= 1000 AND popularity > 0)),
-	CONSTRAINT aritsits_unique_name UNIQUE (first_name,last_name)
+    CONSTRAINT artists_popularity_check CHECK ((popularity <= 1000 AND popularity > 0))
 );
 
 CREATE TABLE cities (
