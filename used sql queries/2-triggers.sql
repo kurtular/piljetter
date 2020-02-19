@@ -188,6 +188,8 @@ INSERT INTO tickets (concert_id, user_id) VALUES (new_concert_id, new_user_id) r
 END IF;
 IF (get_ticket_id IS NOT NULL)  THEN INSERT INTO voucher_tickets (ticket_id,voucher_id) VALUES (get_ticket_id,new_voucher_id);
 END IF;
+IF (get_ticket_id IS NOT NULL) THEN UPDATE vouchers set used = true WHERE vouchers.voucher_id = new_voucher_id;
+END IF;
 END;
    $$
 LANGUAGE 'plpgsql';
