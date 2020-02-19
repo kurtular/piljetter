@@ -82,6 +82,22 @@ $$ LANGUAGE plpgsql;
 CREATE TRIGGER refund_new_vouchers_tr AFTER UPDATE OF cancelled ON concerts
 FOR EACH ROW EXECUTE PROCEDURE refund_new_vouchers();
 
+/**/
+CREATE FUNCTION Pesetas_charging()
+RETURNS TRIGGER AS $$
+DECLARE
+exchangingRate real := 0.5;
+toCharge real := NEW.deposit_sek*exchangingRate;
+BEGIN
+UPDATE pesetas_charging SET amount_pesetas = toCharge WHERE user_id=NEW.user_id;
+UPDATE wallets SET balance = balance+toCharge WHERE user_id=NEW.user_id;
+RETURN NULL;
+END;
+$$ language plpgsql;
+--
+CREATE TRIGGER pesetas_charging_tr AFTER INSERT ON pesetas_charging
+FOR EACH ROW EXECUTE PROCEDURE Pesetas_charging();
+
 /*HENRIK*/
 
 CREATE FUNCTION  create_wallet(inputtedUserId integer)
