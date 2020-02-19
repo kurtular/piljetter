@@ -125,33 +125,6 @@ $$
 LANGUAGE 'plpgsql';
 
 
-CREATE FUNCTION  buytickets(new_concert_id integer ,new_user_id integer, new_voucher_id integer)
-RETURNS VOID AS $$
-DECLARE get_ticket_id integer;
-DECLARE actual_ticket_price integer;
-DECLARE get_wallet_balance integer;
-DECLARE used_voucher boolean;
-DECLARE get_expire_date date ;
-BEGIN
-actual_ticket_price = ticket_price FROM concerts WHERE concerts.concert_id = new_concert_id;
-get_wallet_balance = balance FROM wallets WHERE wallets.user_id = new_user_id;
-IF NOT EXISTS (SELECT * FROM voucher_tickets WHERE voucher_id =new_voucher_id) THEN used_voucher = 'false'; 
-END IF;
-get_expire_date = expire_date FROM vouchers WHERE  vouchers.voucher_id = new_voucher_id;
-IF (new_voucher_id = 0 AND get_wallet_balance >= actual_ticket_price OR
-new_voucher_id>0 AND used_voucher = 'false'  AND get_expire_date >= CURRENT_DATE)  THEN
-INSERT INTO tickets (concert_id, user_id) VALUES (new_concert_id, new_user_id) returning ticket_id INTO get_ticket_id;
-END IF;
-IF (new_voucher_id =0 AND get_ticket_id IS NOT NULL) THEN INSERT INTO pesetas_tickets (ticket_id) VALUES (get_ticket_id);
-END IF;
-IF (new_voucher_id =0 AND get_ticket_id IS NOT NULL) THEN UPDATE wallets set balance = balance-actual_ticket_price WHERE wallets.user_id = new_user_id;
-END IF;
-IF (new_voucher_id >0 AND get_ticket_id IS NOT NULL)  THEN INSERT INTO voucher_tickets (ticket_id,voucher_id) VALUES (get_ticket_id,new_voucher_id);
-END IF;
-END;
- 
- $$
-LANGUAGE 'plpgsql';
 
 CREATE FUNCTION  total_tickets_in_period(from_date timestamp(6) without time zone,to_date timestamp(6) without time zone)
 RETURNS integer AS $$
@@ -174,3 +147,67 @@ AND concerts.concert_id = tickets.concert_id GROUP BY ticket_price) as sum_total
 RETURN total_income;
 END; $$
 LANGUAGE 'plpgsql';
+
+CREATE OR REPLACE FUNCTION best_selling_artists ( fromDate timestamp(6) without time zone, toDate timestamp(6) without time zone)
+      RETURNS  TABLE (
+   artist_id integer,
+   first_name varchar,
+   popularity smallint,
+   tickets_sold bigint
+   )
+AS $$
+BEGIN
+RETURN QUERY SELECT
+artists.artist_id,
+ artists.first_name,
+      artists.popularity,
+	  count(*) as tickets_sold
+   FROM
+      concerts,artists,tickets
+   WHERE
+       artists.artist_id= concerts.artist_id AND concerts.concert_id = 
+	  tickets.concert_id AND tickets.purchase_date > fromDate AND
+ tickets.purchase_date < toDate  GROUP BY artists.artist_id,artists.first_name,artists.popularity ORDER BY tickets_sold LIMIT 10 ; 
+ 
+END;  $$
+LANGUAGE 'plpgsql';
+
+CREATE FUNCTION  buy_tickets_with_voucher(new_concert_id integer, new_user_id integer, new_voucher_id integer)
+RETURNS VOID AS $$
+DECLARE get_ticket_id integer;
+DECLARE actual_ticket_price integer;
+DECLARE used_voucher boolean;
+DECLARE get_expire_date date ;
+BEGIN
+actual_ticket_price = ticket_price FROM concerts WHERE concerts.concert_id = new_concert_id;
+IF NOT EXISTS (SELECT * FROM voucher_tickets WHERE voucher_id =new_voucher_id) THEN used_voucher = 'false'; 
+END IF;
+get_expire_date = expire_date FROM vouchers WHERE  vouchers.voucher_id = new_voucher_id;
+IF (used_voucher = 'false'  AND get_expire_date >= CURRENT_DATE)  THEN
+INSERT INTO tickets (concert_id, user_id) VALUES (new_concert_id, new_user_id) returning ticket_id INTO get_ticket_id;
+END IF;
+IF (get_ticket_id IS NOT NULL)  THEN INSERT INTO voucher_tickets (ticket_id,voucher_id) VALUES (get_ticket_id,new_voucher_id);
+END IF;
+END;
+   $$
+LANGUAGE 'plpgsql';
+
+CREATE FUNCTION  buy_tickets_with_pesetas(new_concert_id integer , new_user_id integer)
+RETURNS VOID AS $$
+DECLARE get_ticket_id integer;
+DECLARE actual_ticket_price integer;
+DECLARE get_wallet_balance integer;
+BEGIN
+actual_ticket_price = ticket_price FROM concerts WHERE concerts.concert_id = new_concert_id;
+get_wallet_balance = balance FROM wallets WHERE wallets.user_id = new_user_id;
+IF (get_wallet_balance >= actual_ticket_price)  THEN
+INSERT INTO tickets (concert_id, user_id) VALUES (new_concert_id, new_user_id) returning ticket_id INTO get_ticket_id;
+END IF;
+IF (get_ticket_id IS NOT NULL) THEN INSERT INTO pesetas_tickets (ticket_id) VALUES (get_ticket_id);
+END IF;
+IF (get_ticket_id IS NOT NULL) THEN UPDATE wallets set balance = balance-actual_ticket_price WHERE wallets.user_id = new_user_id;
+END IF;
+END;
+   $$
+LANGUAGE 'plpgsql';
+
