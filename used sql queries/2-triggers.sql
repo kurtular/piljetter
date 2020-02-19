@@ -83,20 +83,33 @@ CREATE TRIGGER refund_new_vouchers_tr AFTER UPDATE OF cancelled ON concerts
 FOR EACH ROW EXECUTE PROCEDURE refund_new_vouchers();
 
 /*HENRIK*/
-CREATE FUNCTION  create_user(IN new_username varchar, IN new_password varchar, IN new_first_name varchar, IN new_last_name varchar, IN new_email varchar)
+
+CREATE FUNCTION  create_wallet(inputtedUserId integer)
 RETURNS VOID AS $$
-DECLARE get_user_id integer;
-DECLARE get_role_id integer;
 BEGIN
-get_role_id =  role_id FROM roles WHERE role = 'user';
-insert into users (user_name, password, email, first_name, last_name, role_id)
-values (new_username, new_password, new_email, new_first_name, new_last_name,get_role_id)  returning user_id into get_user_id;
-insert into wallets (user_id) VALUES (get_user_id);
+insert into wallets (user_id) VALUES (inputtedUserId);
 END;
 $$
 LANGUAGE 'plpgsql';
 
-CREATE FUNCTION  buytickets(IN new_concert_id integer ,IN new_user_id integer, IN new_voucher_id integer)
+CREATE FUNCTION  new_create_user(newUsername varchar, newPassword varchar, newFirstName varchar, newLastName varchar, newEmail varchar
+							,newRole varchar)
+RETURNS VOID AS $$
+DECLARE getUserId integer;
+DECLARE getRoleId integer;
+BEGIN
+getRoleId =  role_id FROM roles WHERE role = newRole;
+insert into users (user_name, password, email, first_name, last_name, role_id)
+values (newUsername, newPassword, newEmail, newFirstName, newLastName,getRoleId)  returning user_id into getUserId;
+IF (newRole = 'customer') THEN PERFORM
+create_wallet(getUserId);
+END IF;
+END;
+$$
+LANGUAGE 'plpgsql';
+
+
+CREATE FUNCTION  buytickets(new_concert_id integer ,new_user_id integer, new_voucher_id integer)
 RETURNS VOID AS $$
 DECLARE get_ticket_id integer;
 DECLARE actual_ticket_price integer;
@@ -124,7 +137,7 @@ END;
  $$
 LANGUAGE 'plpgsql';
 
-CREATE FUNCTION  total_tickets_in_period(IN from_date timestamp(6) without time zone,IN to_date timestamp(6) without time zone)
+CREATE FUNCTION  total_tickets_in_period(from_date timestamp(6) without time zone,to_date timestamp(6) without time zone)
 RETURNS integer AS $$
 DECLARE total_tickets integer;
 BEGIN
@@ -134,7 +147,7 @@ END;
 $$
 LANGUAGE 'plpgsql';
 
-CREATE FUNCTION  total_income_in_period(IN from_date timestamp(6) without time zone,IN to_date timestamp(6) without time zone)
+CREATE FUNCTION  total_income_in_period(from_date timestamp(6) without time zone,to_date timestamp(6) without time zone)
 RETURNS integer AS $$
 DECLARE total_income integer;
 BEGIN
