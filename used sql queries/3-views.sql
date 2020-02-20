@@ -1,4 +1,4 @@
-/**/
+/*funkar*/
 CREATE VIEW unused_vouchers_statistic AS 
 SELECT to_char(expire_date, 'YYYY/MM')AS Expire_month,COUNT(*) AS amount_vouchers FROM vouchers WHERE used=false
 GROUP BY to_char(expire_date, 'YYYY/MM')
@@ -6,7 +6,7 @@ ORDER BY Expire_month ASC;
 --
 SELECT * FROM unused_vouchers_statistic;
 
-/**/
+/*funkar*/
 CREATE VIEW concerts_profit AS
 SELECT tic.concert_id,art.name AS artist_name,
 con.spending,

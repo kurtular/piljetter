@@ -66,6 +66,7 @@ CREATE TABLE tickets (
 CREATE TABLE re_pesetas_tickets (
     reg_id serial primary key CHECK (reg_id>0),
     ticket_id int UNIQUE NOT NULL REFERENCES tickets(ticket_id),
+    refunded_pesetas int NOT NULL DEFAULT 0,
     "time" timestamp NOT NULL DEFAULT now()
 );
 CREATE TABLE pesetas_tickets (
