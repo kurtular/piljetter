@@ -2,23 +2,20 @@
 session_start();
 if(isset($_GET['signout'])){
     session_destroy();
-}
-
-if(isset($_SESSION['userId'])){
+    header("location:login.php");
+}else if(isset($_SESSION['userId'])){
     header("location:index.php");
-}
-
-if(isset($_POST['submit'])){
+}else if(isset($_POST['submit'])){
 $userName = $_POST['username'];
 $password = $_POST['password'];
 require 'php-parts/db-connection.php';
-$sql= "SELECT user_id FROM users WHERE user_name='$userName' AND password='$password'";
+$sql= "SELECT u.user_id,r.role FROM users AS u,roles as r WHERE r.role_id=u.role_id AND user_name='$userName' AND password='$password'";
 $stmt = $conn->prepare($sql);
 $stmt->execute();
 while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
     $_SESSION['userId'] = $row['user_id'];
-    header("location:index.php");
-}
+    $_SESSION['roleId'] = $row['role_id'];
+    header("location:index.php");} 
 if(!isset($_SESSION['userId'])){
 $msg ="!! Felaktig användarnamn eller lösenord. !!";}
 }

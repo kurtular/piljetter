@@ -1,4 +1,4 @@
-create database piljetter;
+CREATE DATABASE piljetter;
 CREATE TABLE artists (
     artist_id serial primary key CHECK(artist_id >0),
     name varchar(50) NOT NULL,

@@ -12,6 +12,7 @@ require 'php-parts/login-check.php';
     <link href="https://fonts.googleapis.com/css?family=Fugaz+One|Lato|Nova+Flat|Sofia&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/c-h.css">
     <script src="js/c-h.js"></script>
+    <script src="js/ajax.js"></script>
     <title>hemsida</title>
 </head>
 <body>
@@ -47,13 +48,7 @@ require 'php-parts/login-check.php';
             </div>
 
         </header>
-        <div class="concert">
-            <div class="artist">artist</div>
-            <div class="address">plats</div>
-            <div class="date">date</div>
-            <div class="price">price</div>
-            <div class="amount">remaining tickets amount</div>
-            <i class="fas fa-cart-plus addToCart"></i>
+        <div id="content">
         </div>
     </main>
     <?php include 'html-parts/footer.html';?>

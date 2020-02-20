@@ -7,7 +7,7 @@ ORDER BY Expire_month ASC;
 SELECT * FROM unused_vouchers_statistic;
 
 /*funkar*/
-CREATE VIEW concerts_profit AS
+CREATE VIEW concerts_profit_statistic AS
 SELECT tic.concert_id,art.name AS artist_name,
 con.spending,
 count(*)*con.ticket_price as earning,

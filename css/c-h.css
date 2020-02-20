@@ -182,7 +182,7 @@ input[type="date"]::-webkit-inner-spin-button{
     font-family: 'Nova Flat', cursive;
     text-align: left;
     user-select: none;
-    width: 24%;/*responsive*/
+    width: 30%;/*responsive*/
 }
 .concert div:nth-child(5){
     display: inline-block;
@@ -282,11 +282,19 @@ main div::before{
     content: '\f3c5'; 
     font-weight:600;
 }
+.building:before{
+    content: '\f64f'; 
+    font-weight:600;
+}
 .date:before{
     content: '\f073'; 
 }
 .price:before{
     content: '\f3d1'; 
+}
+.price:after{
+    font-size: xx-small;
+    content: " Pp";
 }
 .amount:before{
     content: '\f3ff';

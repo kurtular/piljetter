@@ -43,11 +43,11 @@ for each row execute procedure decrease_concert_remaining_tickets();
 CREATE FUNCTION create_re_pesetas_tickets()
 RETURNS TRIGGER AS $$
 DECLARE
-ticketId integer;
+ticketId integer[];
 BEGIN
 IF NEW.cancelled = true THEN
-INSERT INTO re_pesetas_tickets (ticket_id)SELECT ticket_id from pesetas_tickets WHERE ticket_id IN (SELECT ticket_id FROM tickets WHERE concert_id = NEW.concert_id) returning ticket_id INTO ticketId;
-UPDATE re_pesetas_tickets set refunded_pesetas = NEW.ticket_price WHERE ticket_id =ticketId; 
+INSERT INTO re_pesetas_tickets (ticket_id) SELECT ticket_id from pesetas_tickets WHERE ticket_id IN (SELECT ticket_id FROM tickets WHERE concert_id = NEW.concert_id);
+UPDATE re_pesetas_tickets set refunded_pesetas = NEW.ticket_price WHERE ticket_id IN (SELECT ticket_id from pesetas_tickets WHERE ticket_id IN (SELECT ticket_id FROM tickets WHERE concert_id = NEW.concert_id)); 
 END IF;
 return null;
 END;
