@@ -1,12 +1,15 @@
-window.onload = function(){
+window.addEventListener("load",function(){
 reLoadContent();
-setInterval(reLoadContent,5000);
-};
+setInterval(reLoadContent,10000);
+});
+
 function reLoadContent() {
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
       if (this.readyState == 4 && this.status == 200) {
-        show_concerts(JSON.parse(this.responseText));
+        var data = JSON.parse(this.responseText);
+        showUserNb(data.user);
+        show_concerts(data.concerts);
       }
     };
     xhttp.open("GET", "php-pages/cus.php", true);
@@ -14,9 +17,9 @@ function reLoadContent() {
   }
   function show_concerts(data){
     var content = document.getElementById("content");
-    content.innerHTML="";
+    var newContent="";
     data.forEach(ele => {
-        content.innerHTML+=`<div class="concert" item-id="${ele.concertId}">`+
+      newContent+=`<div class="concert" item-id="${ele.concertId}">`+
         `<div class="artist">${ele.artistName}.</div>`+
         `<div class="building">${ele.sceneName}.</div>`+
         `<div class="address">${ele.address}</div>`+
@@ -26,4 +29,14 @@ function reLoadContent() {
         `<i class="fas fa-cart-plus addToCart"></i>`+
         `</div>`;
     });
+    if(newContent!=content.innerHTML){
+      content.innerHTML = newContent;
+    }
+  }
+  function showUserNb(data){
+    var profile = document.querySelector("#profile > div:first-child");
+    var profileValue=`<p>${data.name}</p><p>${data.balance}</p>`;
+    if(profileValue!=profile.innerHTML){
+      profile.innerHTML = profileValue;
+    }
   }

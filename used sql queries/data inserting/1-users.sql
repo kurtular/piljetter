@@ -8,7 +8,7 @@ SELECT create_user('mohammad', 'ahmad', 'mohammad', 'ahmad', 'ma@it.com','admin'
 SELECT create_user('henrik', 'larsson', 'henrik', 'larsson', 'hl@histats.com','admin');
 
 -- create customers
-SELECT create_user('clorence5', 'L8o5hcPqGWjo', 'Coral', 'Lorence', 'clorence5@sun.com','customer');
+SELECT create_user('customer', 'customer', 'customer', 'demo', 'clorence5@sun.com','customer');
 SELECT create_user('asmeath6', 'CcTOrlZN', 'Anselm', 'Smeath', 'asmeath6@lycos.com','customer');
 SELECT create_user('hweinham7', 'JJj21MqkZy', 'Hayward', 'Weinham', 'hweinham7@ft.com','customer');
 SELECT create_user('fleadbetter8', '4FNqz9BW7Ml', 'Frasco', 'Leadbetter', 'fleadbetter8@pcworld.com','customer');

@@ -42,8 +42,6 @@ for each row execute procedure decrease_concert_remaining_tickets();
 /*funkar*/
 CREATE FUNCTION create_re_pesetas_tickets()
 RETURNS TRIGGER AS $$
-DECLARE
-ticketId integer[];
 BEGIN
 IF NEW.cancelled = true THEN
 INSERT INTO re_pesetas_tickets (ticket_id) SELECT ticket_id from pesetas_tickets WHERE ticket_id IN (SELECT ticket_id FROM tickets WHERE concert_id = NEW.concert_id);

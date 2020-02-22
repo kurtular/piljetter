@@ -1,7 +1,6 @@
-
-window.onload = function(){
-  document.getElementById("filter-button").addEventListener("click",switchFilter)  
-};
+window.addEventListener("load",function(){
+  document.getElementById("filter-button").addEventListener("click",switchFilter);
+});
 
 //show-hide filter div.
 function switchFilter(){

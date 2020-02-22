@@ -21,4 +21,12 @@ class concert{
         $this->remainingTickets = $remainingTickets;
     }
 }
+class user{
+    public $name;
+    public $balance;
+    function __construct($name,$balance){
+        $this->name=$name;
+        $this->balance=$balance;
+    }
+}
 ?>
