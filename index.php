@@ -11,6 +11,8 @@ require 'php-parts/login-check.php';
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
     <link href="https://fonts.googleapis.com/css?family=Fugaz+One|Lato|Nova+Flat|Sofia&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/c-h.css">
+    <link rel="stylesheet" href="css/nav.css">
+    <link rel="stylesheet" href="css/footer.css">
     <script src="js/c-h.js"></script>
     <script src="js/ajax.js"></script>
     <title>hemsida</title>

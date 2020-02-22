@@ -34,9 +34,10 @@ function reLoadContent() {
     }
   }
   function showUserNb(data){
-    var profile = document.querySelector("#profile > div:first-child");
-    var profileValue=`<p>${data.name}</p><p>${data.balance}</p>`;
-    if(profileValue!=profile.innerHTML){
-      profile.innerHTML = profileValue;
+    var userName = document.querySelector("#user-name");
+    var userBalance = document.querySelector("#user-balance");
+    if(data.name!=userName.innerHTML && userBalance.innerHTML != data.balance){
+      userName.innerHTML = data.name;
+      userBalance.innerHTML = data.balance;
     }
   }

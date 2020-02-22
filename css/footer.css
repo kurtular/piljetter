@@ -1,0 +1,59 @@
+/*footer styling*/
+footer{
+    background-color: #1a1a1a;
+    padding: 2vh 0;
+    text-align: center;
+}
+footer>div{
+    display: inline-table;
+    height: 100%;
+    margin:0  20px;
+    text-align: left;
+    color: #ff2da9;
+}
+footer>div:last-child{
+    padding: 10px;
+    display: block;
+    text-align: center;
+    font-family: "Nova Flat", cursive;
+}
+footer h3{
+    margin-bottom: 5px;
+    color: #ff2da9;
+    font-family: 'Fugaz One', cursive;
+    font-weight: unset;
+}
+footer div:first-child>div{
+text-align: center;
+}
+footer img{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: inline-block;
+    border: 2px solid #2ce4ff;
+    margin: 0 5px;
+}
+footer p{
+    color: #2ce4ff;
+    font-family: "Nova Flat", cursive;
+}
+footer .person{
+    font-family: 'Sofia', cursive;
+}
+/*to top button*/
+#toTop{
+    position: fixed;
+    bottom: 10px;
+    right: 0.5vw;
+    font-size: 30px;
+    color: #2ce4ff;
+    border-radius: 100%;
+    border: 3px solid #2ce4ff;
+    padding: 1px 6px;
+    
+}
+#toTop:hover{
+color: #ff2da9;
+border: 3px solid #ff2da9;
+}

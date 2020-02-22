@@ -1,3 +1,6 @@
+<?php
+require 'php-parts/login-check.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,27 +10,17 @@
     <link rel="shortcut icon" href="img/icon.png" type="image/x-icon">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
     <link href="https://fonts.googleapis.com/css?family=Fugaz+One|Lato|Nova+Flat|Sofia&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/nav.css">
+    <script src="js/ajax.js"></script>
     <link rel="stylesheet" href="css/profile.css">
+    <link rel="stylesheet" href="css/nav.css">
+    <link rel="stylesheet" href="css/footer.css">
     <title>Min sida</title>
 </head>
-
 <body>
-    <nav>
-        <div><a href="/customer-home.html"><img src="img/logo.png"></a></div>
-        
-        <a href="/profile.html" id="profile">
-            <div>
-                <p>Profil</p>
-                <p>21</p>
-            </div>
-        </a>
-        <a href= /login.html><i class="fas fa-sign-out-alt"></i></a>
-    </nav>
+<?php require 'html-parts/nav.html';?>
     <main>
         <h1>Min sida</h1>
-        
-        <i class="fas fa-coins"></i>   
-        <div id="coins"><a href="pesetas.html" ><p>Saldo <br> 21pp</p></a></div>
         
         <h2>Mina biljetter</h2>
         <div class="tickets" id="divs_heads">
@@ -69,7 +62,8 @@
             <div>2020-05-22</div>
             <div>nej</div>
         </div>
-    
     </main>
+    <?php include 'html-parts/footer.html';?>
+    <a id="toTop" href="#"><i class="fas fa-arrow-up" aria-hidden="true"></i></a>
 </body>
 </html>

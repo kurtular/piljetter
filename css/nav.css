@@ -1,0 +1,96 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+}
+html,body{
+    width: 100%;
+    height: 100%;
+    scroll-behavior: smooth;
+}
+body{
+    background: #1c1c1c;
+}
+nav a{text-decoration: none;display: inline-block;}
+nav{
+    background: #1a1a1a;
+    display: inline-grid;
+    align-items: center;
+    grid-template-columns: 25% auto 25%;
+    padding: 0 5%;
+    font-family: 'Fugaz One', cursive;
+    width: 100%;
+    user-select: none;
+    padding: 20px 0;
+}
+nav div:nth-child(1){
+    position: relative;
+    grid-column-start: 2;
+    grid-column-end: 2;
+    text-align: center;
+    width: 100%;
+}
+
+nav img{
+    height:100px;
+    margin: 0 10%;
+}
+nav > div:last-child{
+    display: flex;
+    position: relative;
+    color: #ff2da9;
+    cursor: pointer;
+    grid-column-start: 3;
+    grid-column-end: 3;
+    margin-left: auto;
+    margin-right: 10px;
+}
+nav a{
+    color:#ff2da9;
+}
+nav a:hover{
+    color:#2ce4ff;
+}
+#profile{
+    display: flex;
+    flex-direction: row;
+    margin-right: 10px;
+    color: #ff2da9;
+}
+#profile:hover{
+    color:#2ce4ff;
+}
+#user-name{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    font-size: 1.2vw;
+}
+#user-balance{
+    font-size: 1vw;
+    color: #2ce4ff;
+}
+#user-balance::after{
+    font-size: 0.5vw;
+    content: " Pp";
+}
+#profile::before{
+content: '\f2bd'; 
+font-family: "Font Awesome 5 Free";
+font-size: 2.2vw;
+text-align: center;
+margin: auto;
+margin-right:10px ;
+display: inline-table;
+}
+#sign-out{
+    display: inline-block;
+    color: #ff2da9;
+    margin:auto;
+    margin: auto 0;
+    margin-right: 10px;
+    font-size: xx-large;
+}
+#sign-out:hover{
+    color: #2ce4ff;
+}
