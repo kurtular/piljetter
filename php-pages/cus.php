@@ -44,15 +44,10 @@ while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
 //printing result as json
 echo '{"user":';
 echo json_encode($user,JSON_PRETTY_PRINT);
-<<<<<<< HEAD
-=======
-echo ',"concerts":';
-echo json_encode($concerts,JSON_PRETTY_PRINT);
 echo ',"tickets":';
 echo json_encode($tickets,JSON_PRETTY_PRINT);
 echo ',"vouchers":';
 echo json_encode($vouchers,JSON_PRETTY_PRINT);
->>>>>>> d0876de2fada3ea3693e69b07cc8eb88702cdaaa
 echo "}";
 $conn =null;
 $stmt =null;

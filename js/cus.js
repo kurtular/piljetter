@@ -3,10 +3,14 @@ window.addEventListener("DOMContentLoaded", function () {
   setInterval(reloadContent, 10000);
 });
 function reloadContent() {
-  ajax("php-pages/cus.php", "showUserNb","");
-  if(isSearching()==false){ajax("php-pages/search.php", "showConcerts","");}
+  ajax("php-pages/cus.php", "showUserNb", "");
+  ajax("php-pages/cus.php", "showTickets", "");
+  ajax("php-pages/cus.php", "showVouchers", "");
+  if (document.getElementById("search-bar") != null) {
+    if (isSearching() == false) { ajax("php-pages/search.php", "showConcerts", ""); }
+  }
 }
-function ajax(link, methodToCall,post) {
+function ajax(link, methodToCall, post) {
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
@@ -15,8 +19,8 @@ function ajax(link, methodToCall,post) {
       switch (methodToCall) {
         case "showUserNb": showUserNb(data.user); break;
         case "showConcerts": showConcerts(data.concerts); break;
-        case "showTickets": showTickets(data.tickets);break;
-        case "showVouchers": showVouchers(data.vouchers);break;
+        case "showTickets": showTickets(data.tickets); break;
+        case "showVouchers": showVouchers(data.vouchers); break;
         default: ;
       }
     }
@@ -60,32 +64,36 @@ function buy(itemId) {
   }
 }
 
-function show_tickets(data){
+function showTickets(data) {
   var content = document.getElementById("tickets");
-  content.innerHTML="";
-  data.forEach(ele => {
-      content.innerHTML+=`<div class="ticketrow">`+
-      `<div>${ele.ticketId}</div>`+
-      `<div>${ele.artistName}</div>`+
-      `<div>${ele.sceneName}</div>`+
-      `<div>${ele.city}</div>`+
-      `<div>${ele.country}</div>`+
-      `<div>${ele.date}</div>`+
-      `<div>${ele.time}</div>`+
-      `<div>${ele.ticketPrice}</div>`+ 
-      `<div>${ele.purchaseDate}</div>`+
-      `</div>`;
-  });
+  if (content != null) {
+    content.innerHTML = "";
+    data.forEach(ele => {
+      content.innerHTML += `<div class="ticketrow">` +
+        `<div>${ele.ticketId}</div>` +
+        `<div>${ele.artistName}</div>` +
+        `<div>${ele.sceneName}</div>` +
+        `<div>${ele.city}</div>` +
+        `<div>${ele.country}</div>` +
+        `<div>${ele.date}</div>` +
+        `<div>${ele.time}</div>` +
+        `<div>${ele.ticketPrice}</div>` +
+        `<div>${ele.purchaseDate}</div>` +
+        `</div>`;
+    });
+  }
 }
-function show_vouchers(data){
+function showVouchers(data) {
   var content = document.getElementById("vouchers");
-  content.innerHTML="";
-  data.forEach(ele => {
-      content.innerHTML+=`<div class="voucherrow">`+
-      `<div>${ele.voucherId}</div>`+
-      `<div>${ele.issuedDate}</div>`+
-      `<div>${ele.expiryDate}</div>`+
-      `<div>${ele.used}</div>`+
-      `</div>`;
-  });
+  if (content != null) {
+    content.innerHTML = "";
+    data.forEach(ele => {
+      content.innerHTML += `<div class="voucherrow">` +
+        `<div>${ele.voucherId}</div>` +
+        `<div>${ele.issuedDate}</div>` +
+        `<div>${ele.expiryDate}</div>` +
+        `<div>${ele.used}</div>` +
+        `</div>`;
+    });
+  }
 }

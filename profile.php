@@ -21,10 +21,6 @@ require 'php-parts/login-check.php';
 <?php require 'html-parts/nav.html';?>
     <main>
         <h1>Min sida</h1>
-        
-        <div id=pesetasicon><i class="fas fa-coins"></i>   
-        <div id="coins"><a href="pesetas.html" ><p>Saldo <br> 21pp</p></a></div></div>
-        
         <h2>Mina biljetter</h2>
         <div class="ticketrow" id="divs_heads">
             <div class="hashtag">ID</div>
@@ -37,14 +33,8 @@ require 'php-parts/login-check.php';
             <div class="price">Betalt</div>
             <div class="date">Köpt</div>
         </div>
-        
-        
-        
         <div id="tickets">
-            
-           
         </div>
-        
          <h2>Mina kuponger</h2>
          <div class="voucherrow" id="divs_heads">
             <div class="hashtag">ID</div>
@@ -53,9 +43,7 @@ require 'php-parts/login-check.php';
             <div class="used">Använd</div>
         </div>
         <div id="vouchers">
-            
         </div>
-        
     </main>
     <?php include 'html-parts/footer.html';?>
     <a id="toTop" href="#"><i class="fas fa-arrow-up" aria-hidden="true"></i></a>
