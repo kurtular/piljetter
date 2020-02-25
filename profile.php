@@ -19,31 +19,44 @@ require 'php-parts/login-check.php';
 </head>
 <body>
 <?php require 'html-parts/nav.html';?>
-    <main>
+<main>
+    <div id=addpesetas><i class="fas fa-coins"></i>   
+        <div id="addpesetastext"><a href="pesetas.html" ><p>Fyll på pesetas</p></a></div></div>
         <h1>Min sida</h1>
+        
+        
+        
         <h2>Mina biljetter</h2>
         <div class="ticketrow" id="divs_heads">
             <div class="hashtag">ID</div>
             <div class="artist">Artist</div>
-            <div class="address">Plats</div>
-            <div>Stad</div>
-            <div>Land</div>
+            <div class="building">Plats</div>
+            <div class="address">Stad</div>
+            <div class="country">Land</div>
             <div class="date">Datum</div>
             <div class="time">Tid</div>
             <div class="price">Betalt</div>
             <div class="date">Köpt</div>
         </div>
+        
+        
+        
         <div id="tickets">
+            
+           
         </div>
+        
          <h2>Mina kuponger</h2>
          <div class="voucherrow" id="divs_heads">
             <div class="hashtag">ID</div>
             <div class="date">Utfärdad</div>
             <div class="date">Utgångsdatum</div>
-            <div class="used">Använd</div>
+            <div class="used">Förbrukad</div>
         </div>
         <div id="vouchers">
+            
         </div>
+        
     </main>
     <?php include 'html-parts/footer.html';?>
     <a id="toTop" href="#"><i class="fas fa-arrow-up" aria-hidden="true"></i></a>

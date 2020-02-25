@@ -1,17 +1,22 @@
 CREATE DATABASE piljetter;
+/*A serial can be negative so a check if >0 is created to be sure. Another check if the admin set a correct popularity. Its important
+because of its a part of the calculation for the ticket price. NOT NULL is a reoccuring constraint on almost all columns in the database
+The id:s is often used in searches and reports but the primary keys are auto indexed in postgres so no extra index here.*/
 CREATE TABLE artists (
     artist_id serial primary key CHECK(artist_id >0),
     name varchar(50) NOT NULL,
     popularity smallint NOT NULL,
     CONSTRAINT artists_popularity_check CHECK ((popularity <= 1000 AND popularity > 0))
 );
-
+/*A unique constraint to make sure that two cities in one country cannot have the same name.*/
 CREATE TABLE cities (
     city_id serial primary key CHECK (city_id >0),
     city varchar(40) NOT NULL,
     country varchar(40) NOT NULL,
 	CONSTRAINT cities_unique_city UNIQUE (city,country)
 );
+/*Constraint to guarantee the rate of the scene is correct because its a part of the ticketpricecalculation. And a check for the capacity
+to be positive. It guarantee the uniqueness of the scene so it checks if the adresscombination is unique.*/
 CREATE TABLE scenes (
     scene_id serial primary key CHECK (scene_id>0),
     name varchar(100) NOT NULL,
@@ -24,6 +29,9 @@ CREATE TABLE scenes (
 	CONSTRAINT scenes_capacity_check CHECK ((capacity>0)),
 	CONSTRAINT scenes_address_unique UNIQUE (address,zip_code,city_id)
 );
+/*Maybe the most important table. It has many foreign keys and it check if the concertdate is greater than currentdate. A lot of checks
+to guarantee the calculations is correct at the spending, ticketprice and remainingtickets. Because its used all the time when showing concerts
+it has index at many columns. It also guarantee that no artist can be booked twice at the same day. And the same for the scenes.*/
 CREATE TABLE concerts (
     concert_id serial primary key CHECK (concert_id>0),
     artist_id int NOT NULL REFERENCES artists(artist_id),
@@ -37,10 +45,12 @@ CREATE TABLE concerts (
 	CONSTRAINT concerts_date_artist_id_unique UNIQUE (date,artist_id),
 	CONSTRAINT concerts_date_scene_id_unique UNIQUE (date,scene_id)
 );
+/*The table has few roles but in the future its possible to expand this with other roles than admin and customers.*/
 CREATE TABLE roles (
     role_id smallserial primary key CHECK (role_id>0),
     role varchar(50) NOT NULL UNIQUE
 );
+/*Username and email has to be unique separately. Username are common used so it has an index.*/
 CREATE TABLE users (
     user_id serial primary key CHECK (user_id>0),
     user_name varchar(20) NOT NULL UNIQUE,
@@ -50,6 +60,7 @@ CREATE TABLE users (
     email varchar(400) NOT NULL UNIQUE,
     role_id smallint NOT NULL REFERENCES roles(role_id) 
 );
+/*This table store the transactions. Because of the */
 CREATE TABLE pesetas_charging (
     reg_id serial primary key CHECK (reg_id>0),
     user_id int NOT NULL REFERENCES users(user_id),
