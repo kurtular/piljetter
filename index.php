@@ -27,25 +27,28 @@ require 'php-parts/login-check.php';
                 <button id="filter-button"><i class="fas fa-caret-down"></i>Filter</button>
             </div>
             <div id="filter">
-                <select id="">
+                <select id="selected-country">
                     <option disabled selected value="">Välja ett land</option>
+                    <option value="">Alla länder</option>
                 </select>
-                <select id="">
+                <select id="selected-city">
                     <option disabled selected value="">Välja en stad</option>
+                    <option value="">Alla städer</option>
                 </select>
-                <select id="">
+                <select id="selected-scene">
                     <option disabled selected value="">Välja en scene</option>
+                    <option value="">Alla scener</option>
                 </select><br>
                 <div class="date-input">
                     <label for="date">En viss datum</label><br>
-                    <input type="date" name="" id="f-date"></div><br>
+                    <input type="date" id="c-date"></div><br>
                 <div class="date-input">
                     <label for="f-date">Från och med</label><br>
-                    <input type="date" name="f-date" id="">
+                    <input type="date" id="f-date">
                 </div>
                 <div class="date-input">
                     <label for="l-date">Till och med</label><br>
-                    <input type="date" name="l-date" id="">
+                    <input type="date" id="l-date">
                 </div>
             </div>
 
