@@ -13,8 +13,8 @@ require 'php-parts/login-check.php';
     <link rel="stylesheet" href="css/c-h.css">
     <link rel="stylesheet" href="css/nav.css">
     <link rel="stylesheet" href="css/footer.css">
-    <script src="js/c-h.js"></script>
-    <script src="js/ajax.js"></script>
+    <script src="js/search-bar.js"></script>
+    <script src="js/cus.js"></script>
     <title>hemsida</title>
 </head>
 <body>
@@ -28,13 +28,13 @@ require 'php-parts/login-check.php';
             </div>
             <div id="filter">
                 <select id="">
-                    <option disabled selected>Välja ett land</option>
+                    <option disabled selected value="">Välja ett land</option>
                 </select>
                 <select id="">
-                    <option disabled selected>Välja en stad</option>
+                    <option disabled selected value="">Välja en stad</option>
                 </select>
                 <select id="">
-                    <option disabled selected>Välja en scene</option>
+                    <option disabled selected value="">Välja en scene</option>
                 </select><br>
                 <div class="date-input">
                     <label for="date">En viss datum</label><br>

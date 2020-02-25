@@ -11,7 +11,7 @@ require 'php-parts/login-check.php';
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
     <link href="https://fonts.googleapis.com/css?family=Fugaz+One|Lato|Nova+Flat|Sofia&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/nav.css">
-    <script src="js/ajax.js"></script>
+    <script src="js/cus.js"></script>
     <link rel="stylesheet" href="css/profile.css">
     <link rel="stylesheet" href="css/nav.css">
     <link rel="stylesheet" href="css/footer.css">

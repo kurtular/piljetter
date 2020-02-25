@@ -112,6 +112,22 @@ input[type="date"]::-webkit-inner-spin-button{
 .artist{
     font-family: 'Sofia', cursive;
 }
+.city-country{
+    display: inline-block;
+    font-size: 1.2vh;
+    vertical-align: middle;
+}
+.city-country::before{
+    content: "(";
+    width: auto;
+    margin-left:10px;
+    font-size: 1.2vh;
+    font-family: inherit;
+}
+.city-country::after{
+    content: ")";
+    font-size: 1.2vh;
+}
 .addToCart{
     float: right;
     padding: 3px;

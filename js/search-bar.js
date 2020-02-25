@@ -1,7 +1,8 @@
 window.addEventListener("load",function(){
   document.getElementById("filter-button").addEventListener("click",switchFilter);
-});
 
+  document.querySelectorAll("header select ,header input").forEach(input=>{input.addEventListener("input",search);});
+});
 //show-hide filter div.
 function switchFilter(){
     var filter = document.getElementById("filter");
@@ -12,4 +13,18 @@ function switchFilter(){
          filter.style.display = "none";
          document.querySelector(".fa-caret-up").className="fas fa-caret-down";
         }
-    };
+    }
+    
+function search(){
+  if(isSearching){
+    console.log("yes");
+  }
+  else{
+  reloadContent();
+  }
+}
+function isSearching(){
+  var returned = false;
+  document.querySelectorAll("header select ,header input").forEach(input=>{if(input.value!="")returned=true;});
+  return returned;
+}
