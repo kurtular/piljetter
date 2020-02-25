@@ -60,7 +60,10 @@
         margin-bottom: 3vh;
     
     }
-    .tickets, .vouchers{
+    #pesetasicon{
+        color:yellow;
+    }
+    .ticketrow, .voucherrow{
         border: 3px solid #2ce4ff;
         display: flex;
         padding: 1vw;
@@ -74,43 +77,55 @@
     #divs_heads{
         border: 3px solid #ff2da9;
     }
-    .tickets div:nth-child(1){
+    .ticketrow div:nth-child(1){
         position: inherit;
         margin-inline-start: 0vw;
     }
-    .tickets div:nth-child(2){
+    .ticketrow div:nth-child(2){
         position: absolute;
-        margin-inline-start: 10vw;
+        margin-inline-start: 6vw;
     }
-    .tickets div:nth-child(3){
+    .ticketrow div:nth-child(3){
         position: absolute;
-        margin-inline-start: 20vw;
+        margin-inline-start:17vw;
     }
-    .tickets div:nth-child(4){
+    .ticketrow div:nth-child(4){
         position: absolute;
-        margin-inline-start:37vw;
+        margin-inline-start:28vw;
     }
-    .tickets div:nth-child(5){
+    .ticketrow div:nth-child(5){
         position: absolute;
-       margin-inline-start: 47vw;
+       margin-inline-start: 35vw;
     }
-    .tickets div:nth-child(6){
-        position: absolute;
-        margin-inline-start: 56vw;
-    }
-    .vouchers div:nth-child(1){
-        position: inherit;
-        margin-inline-start: 8vw;
-    }
-    .vouchers div:nth-child(2){
-        position: absolute;
-        margin-inline-start: 23vw;
-    }
-    .vouchers div:nth-child(3){
+    .ticketrow div:nth-child(6){
         position: absolute;
         margin-inline-start: 40vw;
     }
-    .vouchers div:nth-child(4){
+    .ticketrow div:nth-child(7){
+        position: absolute;
+        margin-inline-start: 48vw;
+    }
+    .ticketrow div:nth-child(8){
+        position: absolute;
+        margin-inline-start: 55vw;
+    }
+    .ticketrow div:nth-child(9){
+        position: absolute;
+        margin-inline-start: 60vw;
+    }
+    .voucherrow div:nth-child(1){
+        position: inherit;
+        margin-inline-start: 9vw;
+    }
+    .voucherrow div:nth-child(2){
+        position: absolute;
+        margin-inline-start: 23vw;
+    }
+    .voucherrow div:nth-child(3){
+        position: absolute;
+        margin-inline-start: 40vw;
+    }
+    .voucherrow div:nth-child(4){
         position: absolute;
         margin-inline-start: 56vw;
     }
@@ -219,7 +234,21 @@
     .used:before{
         content: '\f14a';
     }
-    
+    #toTop{
+        position: fixed;
+        bottom: 10px;
+        right: 0.5vw;
+        font-size: 30px;
+        color: #2ce4ff;
+        border-radius: 100%;
+        border: 3px solid #2ce4ff;
+        padding: 1px 6px;
+        
+    }
+    #toTop:hover{
+        color: #ff2da9;
+        border: 3px solid #ff2da9;
+        } 
     
     
    

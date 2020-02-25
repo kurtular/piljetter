@@ -9,13 +9,15 @@ function reLoadContent() {
       if (this.readyState == 4 && this.status == 200) {
         var data = JSON.parse(this.responseText);
         showUserNb(data.user);
-        show_concerts(data.concerts);
+      //  show_concerts(data.concerts);
+        show_tickets(data.tickets);
+        show_vouchers(data.vouchers);
       }
     };
     xhttp.open("GET", "php-pages/cus.php", true);
     xhttp.send();
-  }
-  function show_concerts(data){
+}
+ /* function show_concerts(data){
     var content = document.getElementById("content");
     var newContent="";
     data.forEach(ele => {
@@ -32,7 +34,7 @@ function reLoadContent() {
     if(newContent!=content.innerHTML){
       content.innerHTML = newContent;
     }
-  }
+  } */
   function showUserNb(data){
     var userName = document.querySelector("#user-name");
     var userBalance = document.querySelector("#user-balance");
@@ -41,3 +43,35 @@ function reLoadContent() {
       userBalance.innerHTML = data.balance;
     }
   }
+  function show_tickets(data){
+    var content = document.getElementById("tickets");
+    content.innerHTML="";
+    data.forEach(ele => {
+        content.innerHTML+=`<div class="ticketrow">`+
+        `<div>${ele.ticketId}</div>`+
+        `<div>${ele.artistName}</div>`+
+        `<div>${ele.sceneName}</div>`+
+        `<div>${ele.city}</div>`+
+        `<div>${ele.country}</div>`+
+        `<div>${ele.date}</div>`+
+        `<div>${ele.time}</div>`+
+        `<div>${ele.ticketPrice}</div>`+ 
+        `<div>${ele.purchaseDate}</div>`+
+        `</div>`;
+    });
+  }
+  function show_vouchers(data){
+    var content = document.getElementById("vouchers");
+    content.innerHTML="";
+    data.forEach(ele => {
+        content.innerHTML+=`<div class="voucherrow">`+
+        `<div>${ele.voucherId}</div>`+
+        `<div>${ele.issuedDate}</div>`+
+        `<div>${ele.expiryDate}</div>`+
+        `<div>${ele.used}</div>`+
+        `</div>`;
+    });
+  }
+
+
+  
