@@ -4,7 +4,7 @@ window.addEventListener("DOMContentLoaded", function () {
 });
 function reloadContent() {
   ajax("php-pages/cus.php", "showUserNb","");
-  if(isSearching()==false){ajax("php-pages/search.php", "show_concerts","");}
+  if(isSearching()==false){ajax("php-pages/search.php", "showConcerts","");}
 }
 function ajax(link, methodToCall,post) {
   var xhttp = new XMLHttpRequest();
@@ -14,7 +14,9 @@ function ajax(link, methodToCall,post) {
       // TO check which action will be done.
       switch (methodToCall) {
         case "showUserNb": showUserNb(data.user); break;
-        case "show_concerts": show_concerts(data.concerts); break;
+        case "showConcerts": showConcerts(data.concerts); break;
+        case "showTickets": showTickets(data.tickets);break;
+        case "showVouchers": showVouchers(data.vouchers);break;
         default: ;
       }
     }
@@ -22,7 +24,7 @@ function ajax(link, methodToCall,post) {
   xhttp.open("POST", link, true);
   xhttp.send(post);
 }
-function show_concerts(data) {
+function showConcerts(data) {
   var content = document.getElementById("content");
   if (content != null) {
     var newContent = "";
@@ -56,4 +58,34 @@ function buy(itemId) {
   if (itemId != null && window.confirm('Är du säker om att köpa en biljett?')) {
     window.alert("yes");
   }
+}
+
+function show_tickets(data){
+  var content = document.getElementById("tickets");
+  content.innerHTML="";
+  data.forEach(ele => {
+      content.innerHTML+=`<div class="ticketrow">`+
+      `<div>${ele.ticketId}</div>`+
+      `<div>${ele.artistName}</div>`+
+      `<div>${ele.sceneName}</div>`+
+      `<div>${ele.city}</div>`+
+      `<div>${ele.country}</div>`+
+      `<div>${ele.date}</div>`+
+      `<div>${ele.time}</div>`+
+      `<div>${ele.ticketPrice}</div>`+ 
+      `<div>${ele.purchaseDate}</div>`+
+      `</div>`;
+  });
+}
+function show_vouchers(data){
+  var content = document.getElementById("vouchers");
+  content.innerHTML="";
+  data.forEach(ele => {
+      content.innerHTML+=`<div class="voucherrow">`+
+      `<div>${ele.voucherId}</div>`+
+      `<div>${ele.issuedDate}</div>`+
+      `<div>${ele.expiryDate}</div>`+
+      `<div>${ele.used}</div>`+
+      `</div>`;
+  });
 }

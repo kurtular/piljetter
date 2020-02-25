@@ -22,46 +22,40 @@ require 'php-parts/login-check.php';
     <main>
         <h1>Min sida</h1>
         
+        <div id=pesetasicon><i class="fas fa-coins"></i>   
+        <div id="coins"><a href="pesetas.html" ><p>Saldo <br> 21pp</p></a></div></div>
+        
         <h2>Mina biljetter</h2>
-        <div class="tickets" id="divs_heads">
+        <div class="ticketrow" id="divs_heads">
+            <div class="hashtag">ID</div>
             <div class="artist">Artist</div>
             <div class="address">Plats</div>
-            <div class="date">Datum/tid</div>
+            <div>Stad</div>
+            <div>Land</div>
+            <div class="date">Datum</div>
+            <div class="time">Tid</div>
             <div class="price">Betalt</div>
-            <div class="amount">Kupong</div>
-            <div class="date">Inköpsdatum</div>
-            
+            <div class="date">Köpt</div>
         </div>
-        <div class="tickets" id="tickets">
-            <div>Madonna</div>
-            <div>Ullevi</div>
-            <div>2020-05-23 20:00</div>
-            <div>700</div>
-            <div>Nej</div>
-            <div>2020-02-07</div>
+        
+        
+        
+        <div id="tickets">
             
+           
         </div>
-        <div class="tickets" id="tickets">
-            <div>Eminem</div>
-            <div>Parken</div>
-            <div>2020-08-23 15:00</div>
-            <div>0</div>
-            <div>Ja</div>
-            <div>2020-01-27</div>
-         </div>
+        
          <h2>Mina kuponger</h2>
-         <div class="vouchers" id="divs_heads">
+         <div class="voucherrow" id="divs_heads">
             <div class="hashtag">ID</div>
             <div class="date">Utfärdad</div>
             <div class="date">Utgångsdatum</div>
             <div class="used">Använd</div>
         </div>
-        <div class="vouchers">
-            <div>983734</div>
-            <div>2019-05-22</div>
-            <div>2020-05-22</div>
-            <div>nej</div>
+        <div id="vouchers">
+            
         </div>
+        
     </main>
     <?php include 'html-parts/footer.html';?>
     <a id="toTop" href="#"><i class="fas fa-arrow-up" aria-hidden="true"></i></a>
