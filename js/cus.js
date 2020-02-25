@@ -2,6 +2,7 @@ window.addEventListener("DOMContentLoaded", function () {
   reloadContent();
   setInterval(reloadContent, 10000);
 });
+
 function reloadContent() {
   ajax("php-pages/cus.php", "showUserNb", "");
   ajax("php-pages/cus.php", "showTickets", "");
@@ -88,11 +89,16 @@ function showVouchers(data) {
   if (content != null) {
     content.innerHTML = "";
     data.forEach(ele => {
+      var used = "";
+      if (ele.used == true) {
+        used = "Ja";
+      }
+      else { used = "Nej" }
       content.innerHTML += `<div class="voucherrow">` +
         `<div>${ele.voucherId}</div>` +
         `<div>${ele.issuedDate}</div>` +
         `<div>${ele.expiryDate}</div>` +
-        `<div>${ele.used}</div>` +
+        `<div>${used}</div>` +
         `</div>`;
     });
   }

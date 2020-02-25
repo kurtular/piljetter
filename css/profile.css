@@ -52,6 +52,7 @@
     h1{
         font-size: 5vw;
         color: #ff2da9;
+        margin-left: 10vw;
     }
     h2{
         font-size:2vw;
@@ -60,8 +61,26 @@
         margin-bottom: 3vh;
     
     }
-    #pesetasicon{
-        color:yellow;
+    #addpesetas{
+        float: right;
+        margin-right: 5vw;
+    }
+
+    [class='fas fa-coins']{
+        font-size: 1vw;
+        color: #2ce4ff;
+        text-decoration: none;
+        
+    }
+    #addpesetastext *{
+        font-size: 1vw;
+        color: #2ce4ff;
+        text-decoration: none;
+        
+    }
+    
+    #addpesetastext p:hover{
+        color: #ff2da9;
     }
     .ticketrow, .voucherrow{
         border: 3px solid #2ce4ff;
@@ -187,6 +206,16 @@
     .address:before{
         content: '\f3c5'; 
         font-weight:600;
+    }
+    .building:before{
+        content: '\f64f'; 
+        font-weight:600;
+    }
+    .time:before{
+        content: '\f017';
+    }
+    .country:before{
+        content: '\f024';
     }
     .date:before{
         content: '\f073'; 
