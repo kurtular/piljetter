@@ -21,7 +21,8 @@ function ajax(link, methodToCall,post) {
         case "showConcerts": showConcerts(data.concerts); break;
         case "showTickets": showTickets(data.tickets); break;
         case "showVouchers": showVouchers(data.vouchers); break;
-        default: ;
+        case "showResponse": alert(data.msg); break;
+        default:;
       }
     }
   };
@@ -52,7 +53,7 @@ function showConcerts(data) {
 function showUserNb(data) {
   var userName = document.querySelector("#user-name");
   var userBalance = document.querySelector("#user-balance");
-  if (data.name != userName.innerHTML && userBalance.innerHTML != data.balance) {
+  if (data.name != userName.innerHTML || userBalance.innerHTML != data.balance) {
     userName.innerHTML = data.name;
     userBalance.innerHTML = data.balance;
   }
@@ -61,7 +62,14 @@ function showUserNb(data) {
 //todo
 function buy(itemId) {
   if (itemId != null && window.confirm('Är du säker om att köpa en biljett?')) {
-    window.alert("yes");
+    if(window.confirm("Skulle du använda en kupong för det?")){
+      var voucherId;
+      voucherId=window.prompt("Inmata gärna din kupong id");
+      ajax("php-pages/cus.php", "showResponse",`itemId=${itemId}&vouchId=${voucherId}`);
+    }else{
+      ajax("php-pages/cus.php", "showResponse",`itemId=${itemId}`);
+    }
+    reloadContent();
   }
 }
 
