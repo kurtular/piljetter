@@ -51,7 +51,4 @@ echo json_encode($vouchers,JSON_PRETTY_PRINT);
 echo "}";
 $conn =null;
 $stmt =null;
-
-
-
 ?>

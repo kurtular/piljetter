@@ -1,17 +1,17 @@
-window.addEventListener("DOMContentLoaded", function () {
+window.addEventListener("load", function () {
   reloadContent();
   setInterval(reloadContent, 10000);
 });
 
 function reloadContent() {
+  if (document.getElementById("search-bar") != null) {
+    ajax("php-pages/search.php", "showConcerts",concertsFilter);
+  }
   ajax("php-pages/cus.php", "showUserNb", "");
   ajax("php-pages/cus.php", "showTickets", "");
   ajax("php-pages/cus.php", "showVouchers", "");
-  if (document.getElementById("search-bar") != null) {
-    if (isSearching() == false) { ajax("php-pages/search.php", "showConcerts", ""); }
-  }
 }
-function ajax(link, methodToCall, post) {
+function ajax(link, methodToCall,post) {
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
@@ -27,6 +27,7 @@ function ajax(link, methodToCall, post) {
     }
   };
   xhttp.open("POST", link, true);
+  xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
   xhttp.send(post);
 }
 function showConcerts(data) {
