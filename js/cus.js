@@ -115,3 +115,12 @@ function showVouchers(data) {
     });
   }
 }
+//show-hide pesetas form .
+function switchPesetasForm() {
+  var pForm = document.getElementById("pesetas_charging");
+  if (pForm.style.display == "none" || pForm.style.display == "") {
+    pForm.style.display = "block";
+  } else {
+    pForm.style.display = "none";
+  }
+}
