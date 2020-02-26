@@ -41,7 +41,7 @@ CREATE TABLE concerts (
     concert_id serial primary key CHECK (concert_id>0),
     artist_id int NOT NULL REFERENCES artists(artist_id),
     scene_id int NOT NULL REFERENCES scenes(scene_id),
-    date date NOT NULL CHECK(date > current_date),
+    date date NOT NULL CHECK(date >= current_date),
     time time NOT NULL,
     spending int CHECK (spending>0),
     ticket_price int CHECK (ticket_price>0),

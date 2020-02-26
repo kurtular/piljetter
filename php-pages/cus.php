@@ -1,7 +1,26 @@
 <?php
+header("Content-type: application/json; charset=utf-8");
 require '../php-parts/login-check.php';
 require '../php-parts/db-connection.php';
 require '../php-parts/obj.php';
+if(isset($_POST["itemId"]) && $_POST["itemId"]!=""){
+    if(isset($_POST["vouchId"]) && $_POST["vouchId"]!=""){
+        $sql= "SELECT buy_tickets_with_voucher($_POST[itemId],$_SESSION[userId],$_POST[vouchId]);";
+    }else{
+        $sql= "SELECT buy_tickets_with_pesetas($_POST[itemId],$_SESSION[userId]);";
+    }
+    $stmt = $conn->prepare($sql);
+    $stmt->execute();
+    //should return just one row.
+    $row = $stmt->fetch(PDO::FETCH_ASSOC);
+    if(isset($row['msg']) && $row['msg']!=""){
+        $msg = '{"msg":"'.$row['msg'].'"}';
+        echo $msg;
+    }else{
+        echo  '{"msg":"done"}';
+    }
+    exit();
+}
 //get user information
 $sql= "SELECT concat(u.first_name,' ',u.last_name) AS NAME,w.balance FROM users AS u,wallets AS w WHERE u.user_id=w.user_id AND u.user_id = $_SESSION[userId]";
 $stmt = $conn->prepare($sql);
@@ -29,8 +48,6 @@ while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
     $tickets{$i}->purchaseDate = $dateObj;
     $i++;
 }
-
-
 $sql ="select voucher_id, issued_date, expire_date, used from vouchers WHERE vouchers.user_id = $_SESSION[userId];";
 $stmt = $conn->prepare($sql);
 $stmt->execute();
