@@ -79,6 +79,9 @@ function showTickets(data) {
   if (content != null) {
     content.innerHTML = "";
     data.forEach(ele => {
+      if (ele.vouchered == true) {
+        (ele.ticketPrice = "Kupong")
+      }
       content.innerHTML += `<div class="ticketrow">` +
         `<div>${ele.ticketId}</div>` +
         `<div>${ele.artistName}</div>` +

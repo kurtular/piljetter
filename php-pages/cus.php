@@ -31,9 +31,14 @@ $user= new user($row['name'],$row['balance']);
 
 $sql ="SELECT t.ticket_id,
 a.name AS artist_name, s.name AS scene_name, ci.city, ci.country, c.date, c.time, c.ticket_price,
-t.purchase_date FROM pesetas_tickets as pt,  users as u,
-artists as a, scenes as s, cities as ci, tickets as t, concerts as c
-WHERE pt.ticket_id=t.ticket_id  AND t.user_id = u.user_id AND
+t.purchase_date,
+CASE
+WHEN t.ticket_id IN(select ticket_id from pesetas_tickets) THEN false
+WHEN t.ticket_id IN(select ticket_id from voucher_tickets) THEN true
+END AS vouchered
+FROM users as u,
+artists as a, scenes as s, cities as ci, tickets as t,concerts as c
+WHERE t.user_id = u.user_id AND
 a.artist_id = c.artist_id AND s.scene_id = c.scene_id AND
 ci.city_id = s.city_id AND t.concert_id = c.concert_id AND t.user_id = $_SESSION[userId];";
 $stmt = $conn->prepare($sql);
@@ -41,7 +46,7 @@ $stmt->execute();
 $tickets = array();
 $i=0;
 while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
-    $tickets[$i] = new ticket($row['ticket_id'],$row['artist_name'],$row['scene_name'],$row['city'],$row['country'],$row['date'],$row['time'],$row['ticket_price'],$row['purchase_date']);
+    $tickets[$i] = new ticket($row['ticket_id'],$row['artist_name'],$row['scene_name'],$row['city'],$row['country'],$row['date'],$row['time'],$row['ticket_price'],$row['purchase_date'],$row['vouchered']);
     $getDate =$tickets{$i}->purchaseDate;
     $createDate = new DateTime($getDate);
     $dateObj = $createDate->format("Y-m-d");
