@@ -57,6 +57,11 @@ require 'php-parts/just-for-admin.php';
         <div id="content">
         </div>
     </main>
+    <div id="CREATE"></div>
+    <div id="STATISTIC"></div>
+    <div id="ERD">
+        <?php include "img/erd.svg";?>
+    </div>
     <?php include 'html-parts/footer.html';?>
     <a id="toTop" href="#"><i class="fas fa-arrow-up" aria-hidden="true"></i></a>
 </body>

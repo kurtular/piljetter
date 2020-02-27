@@ -258,3 +258,22 @@ main div::before{
 .hashtag:before{
     content: '#';
 }
+/**/
+#CREATE{
+    display: none;
+    border-left:3px solid #ff2da9;
+    border-right:3px solid #ff2da9;
+}
+#STATISTIC{
+    display: none;
+    border-left:3px solid #ff2da9;
+    border-right:3px solid #ff2da9;
+}
+#ERD{
+    overflow: auto;
+    width: 90%;
+    margin: 0 auto;
+    display: none;
+    border-left:3px solid #ff2da9;
+    border-right:3px solid #ff2da9;
+}

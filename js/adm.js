@@ -72,3 +72,27 @@ function cancel(concertId) {
         reloadContent();
     }
 }
+function show(obj){
+    var home=document.querySelector("main");
+    var create=document.getElementById("CREATE");
+    var statistic=document.getElementById("STATISTIC");
+    var erd=document.getElementById("ERD");
+
+    document.querySelectorAll("nav>a")[0].classList.remove("selected");
+    document.querySelectorAll("nav>a")[1].classList.remove("selected");
+    document.querySelectorAll("nav>a")[2].classList.remove("selected");
+    document.querySelectorAll("nav>a")[3].classList.remove("selected");
+    obj.classList.add("selected");
+
+    home.style.display="none";
+    create.style.display="none";
+    statistic.style.display="none";
+    erd.style.display="none";
+    switch(obj.innerHTML){
+        case "Hem":home.style.display="block";break; 
+        case "skapa":create.style.display="block";break; 
+        case "Statistik":statistic.style.display="block";break; 
+        case "ERD":erd.style.display="block";break;
+        default:home.style.display="block";break;
+    }
+}
