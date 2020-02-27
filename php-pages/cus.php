@@ -21,6 +21,19 @@ if(isset($_POST["itemId"]) && $_POST["itemId"]!=""){
     }
     exit();
 }
+if(isset($_POST["kronor"]) && $_POST["kronor"]!=""){
+    $sql= "INSERT into pesetas_charging (user_id,deposit_sek) Values ($_SESSION[userId],$_POST[kronor]);";
+    $stmt = $conn->prepare($sql);
+    $stmt->execute();
+    $row = $stmt->fetch(PDO::FETCH_ASSOC);
+    if(isset($row['msg']) && $row['msg']!=""){
+        $msg = '{"msg":"'.$row['msg'].'"}';
+        echo $msg;
+    }else{
+        echo  '{"msg":"Deposit success!"}';
+    }
+    exit();
+}
 //get user information
 $sql= "SELECT concat(u.first_name,' ',u.last_name) AS NAME,w.balance FROM users AS u,wallets AS w WHERE u.user_id=w.user_id AND u.user_id = $_SESSION[userId]";
 $stmt = $conn->prepare($sql);

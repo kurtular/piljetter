@@ -55,34 +55,35 @@ require 'php-parts/login-check.php';
         <form id="pesetas_form">
             <img src="img/logo.png">
             <h1>Här köper du pesetas!</h1>
-            <h2>1 pesetas = 1 krona</h2>
+            <h2>1 krona = 2 pesetas (minsta insättning 50 kronor)</h2>
+            <h3>Under utveckling! Endast beloppet fungerar</h3>
             <div>
                 <div>
-                    <label for="pesetas"><b>Välj antal pesetas</b></label>
-                    <input type="number" name="pesetas" placeholder="" required autocomplete="off">
+                    <label><b>Välj belopp i kronor</b></label>
+                    <input type="number" id="value" min="50" required>
                 </div>
                 <div>
-                    <label for="cardnumber"><b>Kortnummer</b></label>
-                    <input type="number" name="cardnumber" placeholder="" required>
+                    <label><b>Kortnummer</b></label>
+                    <input type="number">
                 </div>
                 <div>
-                    <label for="cardholder_firstname"><b>Förnamn</b></label>
-                    <input type="text" name="cardholder_firstname" placeholder="" required>
+                    <label><b>Förnamn</b></label>
+                    <input type="text">
                 </div>
                 <div>
-                    <label for="cardholder_surname"><b>Efternamn</b></label>
-                    <input type="text" name="cardholder_surname" placeholder="" required autocomplete="off">
+                    <label><b>Efternamn</b></label>
+                    <input type="text">
                 </div>
                 <div>
-                    <label for="expirydate"><b>Utgångsdatum</b></label>
-                    <input type="number" name="expirydate" placeholder="" required autocomplete="off">
+                    <label><b>Utgångsdatum</b></label>
+                    <input type="number">
                 </div>
                 <div>
-                    <label for="cvv"><b>CVV</b></label>
-                    <input type="number" name="cvv" placeholder="" required autocomplete="off">
+                    <label><b>CVV</b></label>
+                    <input type="number">
                 </div>
             </div>
-            <button name=purchase type="submit" value="purchase">Köp</button>
+            <button name=purchase type="submit" >Köp</button>
             <a onclick="switchPesetasForm()">Tillbaka</a>
         </form>
         </div>

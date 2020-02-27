@@ -19,8 +19,28 @@ while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
 if(!isset($_SESSION['userId'])){
 $msg ="!! Felaktig användarnamn eller lösenord. !!";}
 }
+else if(isset($_POST['registrate'])){
+    
+    $customerRole = 'customer';
+    $firstName = $_POST['firstname'];
+    $lastName = $_POST['lastname'];
+    $email = $_POST['email'];
+    $userName = $_POST['username'];
+    $password = $_POST['password'];
+    $repeatPassword = $_POST['repeatpassword'];
+    if ($password == $repeatPassword) {
+    require 'php-parts/db-connection.php';
+    $sql= "SELECT create_user('$userName', '$password', '$firstName', '$lastName', '$email', '$customerRole')  ";
+    $stmt = $conn->prepare($sql);
+    $stmt->execute();
+    header("location:login.php");}
+    else {
+        $wrongpassreg = "wrong pass";
+    }
+}
+    
 
-//todo rigestering
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -51,34 +71,30 @@ $msg ="!! Felaktig användarnamn eller lösenord. !!";}
         <div>
         <div>
             <label for="firstname"><b>Förnamn</b></label>
-            <input type="text" name="firstname" placeholder="Skriv ditt förnamn" required>
+            <input type="text" name="firstname" required>
         </div>
         <div>
-            <label for="surname"><b>Efternamn</b></label>
-            <input type="text" name="surname" placeholder="Skriv ditt efternamn" required>
+            <label for="lastname"><b>Efternamn</b></label>
+            <input type="text" name="lastname"  required>
         </div>
         <div>
             <label for="email"><b>Email</b></label>
-            <input type="email" name="email" placeholder="Skriv in mailadress" required
-                autocomplete="off">
+            <input type="email" name="email"  required>
         </div>
         <div>
             <label for="username"><b>Användarnamn</b></label>
-            <input type="text" name="username" placeholder="Välj användarnamn" required
-                autocomplete="off">
+            <input type="text" name="username"  required>
         </div>
         <div>
             <label for="password"><b>Lösenord</b></label>
-            <input type="password" name="password" placeholder="Välj lösenord" required
-                autocomplete="off">
+            <input type="password" name="password"  required>
         </div>
         <div>
-            <label for="password"><b>Repetera lösenord</b></label>
-            <input type="password" name="repeatpassword" placeholder="Repetera lösenord" required
-                autocomplete="off">
+            <label for="repeatpassword"><b>Repetera lösenord</b></label>
+            <input type="password" name="repeatpassword"  required>
         </div>
     </div>
-<button name=registrate type="submit" value="registrate">Registrera</button>
+<button name="registrate" type="submit" value="registrate">Registrera</button>
 <span onclick='show("log")'>Logga in</span>
 </form>
 </body>

@@ -1,4 +1,5 @@
 window.addEventListener("load", function () {
+  buyPesetas();
   reloadContent();
   setInterval(reloadContent, 10000);
 });
@@ -74,6 +75,7 @@ function buy(itemId) {
   }
 }
 
+
 function showTickets(data) {
   var content = document.getElementById("tickets");
   if (content != null) {
@@ -123,4 +125,17 @@ function switchPesetasForm() {
   } else {
     pForm.style.display = "none";
   }
+}
+
+function buyPesetas(){
+  if(document.getElementById("pesetas_form")!=null){
+document.querySelector("#pesetas_form button[type='submit']").onclick = function(e){
+  if(document.getElementById("value").value >= 50){
+  e.preventDefault();
+  var kronor = document.getElementById("value").value;
+  ajax("php-pages/cus.php", "showResponse",`kronor=${kronor}`);
+  reloadContent();
+}
+}
+}
 }

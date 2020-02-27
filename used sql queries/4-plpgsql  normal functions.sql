@@ -18,7 +18,7 @@ $$ LANGUAGE plpgsql;
 CREATE FUNCTION pesetas_exchanging(money integer)
 RETURNS real AS $$
 DECLARE
-exchangingRate real := 0.5;
+exchangingRate real := 2;
 result real := money*exchangingRate;
 BEGIN
 RETURN result;
