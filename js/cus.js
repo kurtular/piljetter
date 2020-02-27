@@ -59,14 +59,12 @@ function showUserNb(data) {
     userBalance.innerHTML = data.balance;
   }
 }
-
-//todo
 function buy(itemId) {
   if (itemId != null && window.confirm('Är du säker om att köpa en biljett?')) {
     if(window.confirm("Skulle du använda en kupong för det?")){
       var voucherId;
       voucherId=window.prompt("Inmata gärna din kupong id");
-      ajax("php-pages/cus.php", "showResponse",`itemId=${itemId}&vouchId=${voucherId}`);
+      if(voucherId !=null){console.log(voucherId);ajax("php-pages/cus.php", "showResponse",`itemId=${itemId}&vouchId=${voucherId}`);}
     }else{
       ajax("php-pages/cus.php", "showResponse",`itemId=${itemId}`);
     }

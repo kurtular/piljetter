@@ -3,6 +3,7 @@ header("Content-type: application/json; charset=utf-8");
 require '../php-parts/login-check.php';
 require '../php-parts/db-connection.php';
 require '../php-parts/obj.php';
+require '../php-parts/just-for-customer.php';
 if(isset($_POST["itemId"]) && $_POST["itemId"]!=""){
     if(isset($_POST["vouchId"]) && $_POST["vouchId"]!=""){
         $sql= "SELECT buy_tickets_with_voucher($_POST[itemId],$_SESSION[userId],$_POST[vouchId]);";

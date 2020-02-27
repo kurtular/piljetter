@@ -1,5 +1,6 @@
 <?php
 require 'php-parts/login-check.php';
+require 'php-parts/just-for-customer.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -55,7 +56,7 @@ require 'php-parts/login-check.php';
         <form id="pesetas_form">
             <img src="img/logo.png">
             <h1>Här köper du pesetas!</h1>
-            <h2>1 pesetas = 1 krona</h2>
+            <h2>1 pesetas = 2 kronor</h2>
             <div>
                 <div>
                     <label for="pesetas"><b>Välj antal pesetas</b></label>
