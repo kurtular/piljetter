@@ -14,8 +14,11 @@ $stmt = $conn->prepare($sql);
 $stmt->execute();
 while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
     $_SESSION['userId'] = $row['user_id'];
-    $_SESSION['roleId'] = $row['role_id'];
-    header("location:index.php");} 
+    $_SESSION['userRole'] = $row['role'];
+    if($_SESSION['userRole']=="admin"){
+        header("location:ad-index.php");
+    }else{header("location:index.php");}
+} 
 if(!isset($_SESSION['userId'])){
 $msg ="!! Felaktig användarnamn eller lösenord. !!";}
 }

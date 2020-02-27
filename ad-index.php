@@ -1,6 +1,6 @@
 <?php
 require 'php-parts/login-check.php';
-require 'php-parts/just-for-customer.php';
+require 'php-parts/just-for-admin.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -12,14 +12,14 @@ require 'php-parts/just-for-customer.php';
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
     <link href="https://fonts.googleapis.com/css?family=Fugaz+One|Lato|Nova+Flat|Sofia&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/c-h.css">
-    <link rel="stylesheet" href="css/nav.css">
+    <link rel="stylesheet" href="css/adnav.css">
     <link rel="stylesheet" href="css/footer.css">
     <script src="js/search-bar.js"></script>
-    <script src="js/cus.js"></script>
+    <script src="js/adm.js"></script>
     <title>hemsida</title>
 </head>
 <body>
-    <?php require 'html-parts/nav.html';?>
+    <?php require 'html-parts/ad-nav.html';?>
     <main>
         <header>
             <div id="search-bar">

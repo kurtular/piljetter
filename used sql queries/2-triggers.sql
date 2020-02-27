@@ -18,7 +18,7 @@ for each row execute procedure calc_concert_spending();
 CREATE FUNCTION calc_concert_ticket_price()
 RETURNS trigger AS $$
 BEGIN
-UPDATE concerts SET ticket_price = ((NEW.spending+(NEW.spending*0.3))/remaining_tickets+1)
+UPDATE concerts SET ticket_price = ((NEW.spending*1.3)/remaining_tickets+1)
 WHERE concert_id = NEW.concert_id;
 RETURN null;
 END;

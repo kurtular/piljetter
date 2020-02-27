@@ -1,5 +1,6 @@
 <?php
 require 'php-parts/login-check.php';
+require 'php-parts/just-for-customer.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">

@@ -106,6 +106,17 @@ input[type="date"]::-webkit-inner-spin-button{
     user-select: none;
     width: 30%;/*responsive*/
 }
+.passed{
+    border: 3px solid #22a0b2 !important;
+    color: #c2c2c2;
+}
+.cancelled{
+    border: 3px solid #ff2da9 !important;
+}
+.passedcancelled{
+    border: 3px solid #881759 !important;
+    color: #c2c2c2;
+}
 .concert div:nth-child(5){
     display: inline-block;
 }
@@ -136,11 +147,43 @@ input[type="date"]::-webkit-inner-spin-button{
     cursor: pointer;
     color: #2ce4ff;
     display: inline-block;
-    font-size: large !important;
+    font-size: 1.5vw !important;
 }
 .addToCart:hover{
     border: 1px solid #ff2da9;
     color: #ff2da9;
+}
+.con-cancelled{
+    text-align: center;
+    color:#ff2da9;
+}
+.con-option{
+    padding: 3px;
+    font-weight: 600;
+    cursor: pointer;
+    display: inline-block;
+    margin:0 10px;
+    font-size: 1.5vw !important;
+}
+.con-con{
+    padding-top: 10px ;
+    text-align: center;
+}
+.con-cancell{
+    border: 1px solid #ff2da9;
+    color: #ff2da9;
+}
+.con-cancell:hover{
+    border: 1px solid #f64b3c;
+    color: #f64b3c;
+}
+.con-info{
+    border: 1px solid #eaff2d;
+    color: #eaff2d;
+}
+.con-info:hover{
+    border: 1px solid #ffbc2d;
+    color: #ffbc2d;
 }
 /*icons before texts*/
 :before,i::before{
@@ -211,4 +254,7 @@ main div::before{
 }
 .person:before{
     content: '\f2bb';
+}
+.hashtag:before{
+    content: '#';
 }
