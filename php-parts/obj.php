@@ -64,7 +64,8 @@ class ticket{
     public $time;
     public $ticketPrice;
     public $purchaseDate;
-    function __construct($ticketId,$artistName,$sceneName,$city,$country,$date,$time,$ticketPrice,$purchaseDate){
+    public $vouchered;
+    function __construct($ticketId,$artistName,$sceneName,$city,$country,$date,$time,$ticketPrice,$purchaseDate,$vouchered){
         $this->ticketId = $ticketId;
         $this->artistName = $artistName;
         $this->sceneName = $sceneName;
@@ -74,6 +75,7 @@ class ticket{
         $this->time = $time;
         $this->ticketPrice = $ticketPrice;
         $this->purchaseDate = $purchaseDate;
+        $this->vouchered = $vouchered;
     }
 }
 class voucher{
