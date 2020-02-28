@@ -11,6 +11,7 @@ require 'php-parts/just-for-admin.php';
     <link rel="shortcut icon" href="img/icon.png" type="image/x-icon">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
     <link href="https://fonts.googleapis.com/css?family=Fugaz+One|Lato|Nova+Flat|Sofia&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.js"></script>
     <link rel="stylesheet" href="css/c-h.css">
     <link rel="stylesheet" href="css/adnav.css">
     <link rel="stylesheet" href="css/footer.css">
@@ -62,8 +63,8 @@ require 'php-parts/just-for-admin.php';
     <div id="ERD">
         <?php include "img/erd.svg";?>
     </div>
-    <div id="concert-info"><div></div></div>
-    <?php include 'html-parts/footer.html';?>
+    <?php require 'html-parts/concert-info.html';?>
+    <?php require 'html-parts/footer.html';?>
     <a id="toTop" href="#"><i class="fas fa-arrow-up" aria-hidden="true"></i></a>
 </body>
 </html>

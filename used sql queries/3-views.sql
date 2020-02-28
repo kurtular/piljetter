@@ -19,4 +19,4 @@ con.ticket_price,
 (SELECT count(*) FROM tickets WHERE ticket_id IN (SELECT ticket_id FROM voucher_tickets) AND concert_id=con.concert_id) AS voucher_tickets
 FROM tickets AS tic,
 concerts AS con
-group by con.concert_id,con.ticket_price,con.spending) AS result
+group by con.concert_id,con.ticket_price,con.spending) AS result;

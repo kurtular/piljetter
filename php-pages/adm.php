@@ -15,6 +15,17 @@ if(isset($_POST["cancelCon"]) && $_POST["cancelCon"]!="" && isset($_POST["extra"
     }
     exit();
 }
+//show data
+if(isset($_POST["overview"]) && $_POST["overview"]!=""){
+    $sql= "SELECT * FROM concerts_profit_statistic WHERE concert_id= $_POST[overview]";
+    $stmt = $conn->prepare($sql);
+    $stmt->execute();
+    //should return just one row.
+    $row = $stmt->fetch(PDO::FETCH_ASSOC);
+    $overView = new OverView($row['concert_id'],$row['spending'],$row['earning'],$row['profit'],$row['total_amount_tickets'],$row['sold_tickets'],$row['voucher_tickets']);
+    echo json_encode($overView,JSON_PRETTY_PRINT);
+    exit();
+}
 //get user information
 $sql= "SELECT concat(u.first_name,' ',u.last_name) AS NAME FROM users AS u WHERE u.user_id = $_SESSION[userId]";
 $stmt = $conn->prepare($sql);
