@@ -82,16 +82,16 @@ function showTickets(data) {
       if (ele.vouchered == true) {
         (ele.ticketPrice = "Kupong")
       }
-      content.innerHTML += `<div class="ticketrow">` +
-        `<div>${ele.ticketId}</div>` +
-        `<div>${ele.artistName}</div>` +
-        `<div>${ele.sceneName}</div>` +
-        `<div>${ele.city}</div>` +
-        `<div>${ele.country}</div>` +
-        `<div>${ele.date}</div>` +
-        `<div>${ele.time}</div>` +
-        `<div>${ele.ticketPrice}</div>` +
-        `<div>${ele.purchaseDate}</div>` +
+      content.innerHTML += `<div class="profiletables">` +
+        `<div class=cell id="hashtag">${ele.ticketId}</div>` +
+        `<div class=cell id="artist">${ele.artistName}</div>` +
+        `<div class=cell id="building">${ele.sceneName}</div>` +
+        `<div class=cell id="address">${ele.city}</div>` +
+        `<div class=cell id="country">${ele.country}</div>` +
+        `<div class=cell id="date">${ele.date}</div>` +
+        `<div class=cell id="time">${ele.time}</div>` +
+        `<div class=cell id="price">${ele.ticketPrice}</div>` +
+        `<div class=cell id="date">${ele.purchaseDate}</div>` +
         `</div>`;
     });
   }
@@ -106,11 +106,11 @@ function showVouchers(data) {
         used = "Ja";
       }
       else { used = "Nej" }
-      content.innerHTML += `<div class="voucherrow">` +
-        `<div>${ele.voucherId}</div>` +
-        `<div>${ele.issuedDate}</div>` +
-        `<div>${ele.expiryDate}</div>` +
-        `<div>${used}</div>` +
+      content.innerHTML += `<div class="profiletables">` +
+        `<div class="cell" id="v_hashtag">${ele.voucherId}</div>` +
+        `<div class="cell" id="v_date">${ele.issuedDate}</div>` +
+        `<div class="cell" id="v_date">${ele.expiryDate}</div>` +
+        `<div class="cell" id="used">${used}</div>` +
         `</div>`;
     });
   }

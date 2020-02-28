@@ -1,5 +1,5 @@
 
-/*funkar*/
+--Function to cancel a concert.
 CREATE FUNCTION cancel_concert(concertId integer,give_vouchers boolean)
 RETURNS VOID AS $$
 BEGIN
@@ -14,7 +14,7 @@ IF EXISTS (SELECT * FROM concerts WHERE concert_id=concertId AND cancelled=false
 	END;
 $$ LANGUAGE plpgsql;
 
-/*funkar*/
+--Only a exchangefunction. If needed in the future the changingrate can be edit.
 CREATE FUNCTION pesetas_exchanging(money integer)
 RETURNS real AS $$
 DECLARE
@@ -25,9 +25,7 @@ RETURN result;
 END;
 $$ language plpgsql;
 
-/*HENRIK*/
-
-/*funkar*/
+--A function to create wallet. Separate from create user in case of needed for an admin or another wallet in the future.
 CREATE FUNCTION  create_wallet(inputtedUserId integer)
 RETURNS VOID AS $$
 BEGIN
@@ -35,7 +33,7 @@ insert into wallets (user_id) VALUES (inputtedUserId);
 END;
 $$
 LANGUAGE 'plpgsql';
-/*funkar*/
+--Function to create user.
 CREATE FUNCTION  create_user(newUsername varchar, newPassword varchar, newFirstName varchar, newLastName varchar, newEmail varchar,newRole varchar)
 RETURNS VOID AS $$
 DECLARE
@@ -52,7 +50,7 @@ END;
 $$
 LANGUAGE 'plpgsql';
 
-/*funkar*/
+--Function to use to check total tickets sold in a period.
 CREATE FUNCTION  total_tickets_in_period(from_date timestamp(6) without time zone,to_date timestamp(6) without time zone)
 RETURNS integer AS $$
 DECLARE total_tickets integer;
@@ -62,7 +60,7 @@ RETURN total_tickets;
 END;
 $$
 LANGUAGE 'plpgsql';
-/*funkar*/
+--Function to get total income in a period.
 CREATE FUNCTION  total_income_in_period(from_date timestamp(6) without time zone,to_date timestamp(6) without time zone)
 RETURNS integer AS $$
 DECLARE total_income integer;
@@ -74,7 +72,7 @@ AND concerts.concert_id = tickets.concert_id GROUP BY ticket_price) as sum_total
 RETURN total_income;
 END; $$
 LANGUAGE 'plpgsql';
-/*funkar*/
+--Function to get the top ten best selling artists in a period.
 CREATE FUNCTION best_selling_artists ( fromDate timestamp(6) without time zone, toDate timestamp(6) without time zone)
 RETURNS  TABLE (artist_id integer,artist_name varchar,popularity smallint,tickets_sold bigint) AS $$
 BEGIN
@@ -87,7 +85,7 @@ FROM concerts,artists,tickets
 END;  $$
 LANGUAGE 'plpgsql';
 
-/*funkar*/
+--Function to buy tickets with vouchers.
 CREATE FUNCTION  buy_tickets_with_voucher(new_concert_id integer, new_user_id integer, new_voucher_id integer)
 RETURNS VOID AS $$
 DECLARE 
@@ -111,7 +109,7 @@ END;
 $$
 LANGUAGE 'plpgsql';
 
-/*funkar*/
+--Function to buy tickets with pesetas.
 CREATE FUNCTION  buy_tickets_with_pesetas(new_concert_id integer , new_user_id integer)
 RETURNS VOID AS $$
 DECLARE 

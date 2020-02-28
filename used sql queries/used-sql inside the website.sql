@@ -39,7 +39,7 @@ FROM users as u,
 artists as a, scenes as s, cities as ci, tickets as t,concerts as c
 WHERE t.user_id = u.user_id AND
 a.artist_id = c.artist_id AND s.scene_id = c.scene_id AND
-ci.city_id = s.city_id AND t.concert_id = c.concert_id AND t.user_id = $_SESSION[userId];
+ci.city_id = s.city_id AND t.concert_id = c.concert_id AND t.user_id = $_SESSION[userId] ORDER BY c.date;
 
 --To get the vouchers belonging to the active user.
 SELECT voucher_id, issued_date, expire_date, used from vouchers WHERE vouchers.user_id = $_SESSION[userId];

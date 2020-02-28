@@ -1,4 +1,6 @@
-/*funkar*/
+/*Trigger to automatically calculate the spending for the concert based of scene and artist. Beacuse of the huge difference between a
+world known rockstar and a local artist the rating for artists is between 1-2000. The difference is even bigger between huge arenas
+and small local pubs so therefore is the difference between the scenes 1-2000. Its triggered after creating a new concert.*/
 CREATE FUNCTION calc_concert_spending()
 RETURNS trigger AS $$
 declare
@@ -11,10 +13,12 @@ WHERE concert_id = NEW.concert_id;
 RETURN null;
 END;
 $$ language plpgsql;
---
+
 CREATE TRIGGER calc_spending AFTER INSERT ON concerts
 for each row execute procedure calc_concert_spending();
-/*funkar*/
+
+/*Trigger to calculate ticketprice based on spending and available tickets and extra profit. Its hardcoded right now with 1,3(30%). Its triggered
+after the spending is updated.*/
 CREATE FUNCTION calc_concert_ticket_price()
 RETURNS trigger AS $$
 BEGIN
@@ -24,9 +28,12 @@ RETURN null;
 END;
 $$ language plpgsql;
 
+
 CREATE TRIGGER calc_ticket_price AFTER UPDATE OF spending ON concerts
 for each row execute procedure calc_concert_ticket_price();
-/*funkar*/
+
+--Trigger to decrease reminaing tickets after a ticket is bought.
+
 CREATE FUNCTION decrease_concert_remaining_tickets()
 RETURNS trigger AS $$
 BEGIN
@@ -39,7 +46,7 @@ $$ language plpgsql;
 CREATE TRIGGER decrease_remaining_tickets AFTER INSERT ON tickets
 for each row execute procedure decrease_concert_remaining_tickets();
 
-/*funkar*/
+/* Trigger to store the refunded tickets in a table after cancelling a concert*/
 CREATE FUNCTION create_re_pesetas_tickets()
 RETURNS TRIGGER AS $$
 BEGIN
@@ -54,7 +61,7 @@ $$ LANGUAGE plpgsql;
 CREATE TRIGGER re_pesetas_tickets_tr AFTER UPDATE OF cancelled ON concerts
 FOR EACH ROW EXECUTE PROCEDURE create_re_pesetas_tickets();
 
-/*funkar*/
+/*Trigger to refund(update the wallet) the customers after cancelling a concert. Its triggered after inserting tickets in the refunded tickets table.*/
 CREATE FUNCTION refund_pesetas()
 RETURNS TRIGGER AS $$
 declare
@@ -70,7 +77,7 @@ $$ LANGUAGE plpgsql;
 CREATE TRIGGER refund_pesetas_tr AFTER INSERT ON re_pesetas_tickets
 FOR EACH ROW EXECUTE PROCEDURE refund_pesetas();
 
-/*funkar*/
+/*Trigger to refund the vouchertickets with new vouchertickets after cancelling a concert.*/
 CREATE FUNCTION refund_new_vouchers()
 RETURNS TRIGGER AS $$
 BEGIN
@@ -84,7 +91,7 @@ $$ LANGUAGE plpgsql;
 CREATE TRIGGER refund_new_vouchers_tr AFTER UPDATE OF cancelled ON concerts
 FOR EACH ROW EXECUTE PROCEDURE refund_new_vouchers();
 
-/*funkar*/
+/*Trigger to call the exchangefunction when depositing.*/
 CREATE FUNCTION Pesetas_charging()
 RETURNS TRIGGER AS $$
 DECLARE

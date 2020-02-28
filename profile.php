@@ -28,25 +28,27 @@ require 'php-parts/just-for-customer.php';
         </div>
         <h1>Min sida</h1>
         <h2>Mina biljetter</h2>
-        <div class="ticketrow" id="divs_heads">
-            <div class="hashtag" style="margin-left:-1vw;" >ID</div>
-            <div class="artist" style="margin-left:7vw;">Artist</div>
-            <div class="building"style="margin-left:19vw;">Plats</div>
-            <div class="address">Stad</div>
-            <div class="country">Land</div>
-            <div class="date">Datum</div>
-            <div class="time">Tid</div>
-            <div class="price"style="margin-left:53vw;">Betalt</div>
-            <div class="date">Köpt</div>
+        
+        <div class="profiletables" id="tickethead">
+            <div class="cell" id="hashtag">ID</div>
+            <div class="cell" id="artist">Artist</div>
+            <div class="cell" id="building">Plats</div>
+            <div class="cell" id="address">Stad</div>
+            <div class="cell" id="country">Land</div>
+            <div class="cell" id="date">Datum</div>
+            <div class="cell" id="time">Tid</div>
+            <div class="cell" id="price">Betalt</div>
+            <div class="cell" id="date">Köpt</div>
         </div>
         <div id="tickets">
         </div>
+
         <h2>Mina kuponger</h2>
-        <div class="voucherrow" id="divs_heads">
-            <div class="hashtag">ID</div>
-            <div class="date">Utfärdad</div>
-            <div class="date"style="margin-left:38vw;">Utgångsdatum</div>
-            <div class="used"style="margin-left:53vw;">Förbrukad</div>
+        <div class="profiletables" id="voucherhead">
+            <div class="cell"id="v_hashtag">ID</div>
+            <div class="cell"id="v_date">Utfärdad</div>
+            <div class="cell"id="v_date">Utgångsdatum</div>
+            <div class="cell"id="used">Förbrukad</div>
         </div>
         <div id="vouchers">
         </div>

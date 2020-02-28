@@ -52,7 +52,7 @@
     h1{
         font-size: 5vw;
         color: #ff2da9;
-        margin-left: 10vw;
+        clear: both;
     }
     h2{
         font-size:2vw;
@@ -82,71 +82,27 @@
         text-decoration: none;
         
     }
-    .ticketrow, .voucherrow{
+    .profiletables{
+        display: table;
         border: 3px solid #2ce4ff;
-        display: flex;
-        padding: 1vw;
-        margin:auto;
-        margin-top: 1vh;
+        width: 90%;
+        padding-top: 1%;
+        padding-bottom: 1%;
+        margin-top: 1%;
+        margin-left: auto;
+        margin-right: auto;
+        clear: both;
         font-size: 2vh;
         font-family: 'Nova Flat', cursive;
-        user-select: none;
-        width: 80%;/*responsive*/
     }
-    #divs_heads{
+    .cell{
+        display:table-cell;
+        vertical-align: top;
+        text-align: center;
+        
+    }
+    #tickethead, #voucherhead{
         border: 3px solid #ff2da9;
-    }
-    .ticketrow div:nth-child(1){
-        position: inherit;
-        margin-inline-start: 0vw;
-    }
-    .ticketrow div:nth-child(2){
-        position: absolute;
-        margin-inline-start: 6vw;
-    }
-    .ticketrow div:nth-child(3){
-        position: absolute;
-        margin-inline-start:17vw;
-    }
-    .ticketrow div:nth-child(4){
-        position: absolute;
-        margin-inline-start:28vw;
-    }
-    .ticketrow div:nth-child(5){
-        position: absolute;
-       margin-inline-start: 35vw;
-    }
-    .ticketrow div:nth-child(6){
-        position: absolute;
-        margin-inline-start: 40vw;
-    }
-    .ticketrow div:nth-child(7){
-        position: absolute;
-        margin-inline-start: 48vw;
-    }
-    .ticketrow div:nth-child(8){
-        position: absolute;
-        margin-inline-start: 55vw;
-    }
-    .ticketrow div:nth-child(9){
-        position: absolute;
-        margin-inline-start: 60vw;
-    }
-    .voucherrow div:nth-child(1){
-        position: inherit;
-        margin-inline-start: 9vw;
-    }
-    .voucherrow div:nth-child(2){
-        position: absolute;
-        margin-inline-start: 23vw;
-    }
-    .voucherrow div:nth-child(3){
-        position: absolute;
-        margin-inline-start: 40vw;
-    }
-    .voucherrow div:nth-child(4){
-        position: absolute;
-        margin-inline-start: 56vw;
     }
     
     /*footer styling*/
@@ -199,29 +155,78 @@
     main div::before{
         font-size: small;
     }
-    .artist::before{
-        content: '\f3c9';
+    
+    #artist{
+        width:14%;
+    }
+    #tickethead div:nth-child(2):before{
+        content: '\f3c9'; 
         font-weight:600;
     }
-    .address:before{
+
+    #address{
+        width:10%;
+    }
+    #tickethead div:nth-child(4):before{
         content: '\f3c5'; 
         font-weight:600;
     }
-    .building:before{
-        content: '\f64f'; 
-        font-weight:600;
+    
+    #building{
+        width:16%;
     }
-    .time:before{
+    #tickethead div:nth-child(3):before{
+        content: '\f64f'; 
+         font-weight:600;
+    }
+    #tickethead div:nth-child(7):before{
         content: '\f017';
     }
-    .country:before{
+    #time{
+        width:8%;
+    }
+    #tickethead div:nth-child(5):before{
         content: '\f024';
     }
-    .date:before{
+    #country{
+        width:10%;
+    }
+    #voucherhead div:nth-child(2):before{
+        content:'\f073';
+    }
+    #voucherhead div:nth-child(3):before{
+        content:'\f073';
+    }
+    
+    #tickethead div:nth-child(9):before{
         content: '\f073'; 
     }
-    .price:before{
+    #tickethead div:nth-child(6):before{
+        content: '\f073'; 
+    }
+    #date{
+        width:10%;
+    }
+    #v_date{
+        width:25%;
+    }
+    #tickethead div:nth-child(8):before{
         content: '\f3d1'; 
+    }
+    #price{
+        width:8%;
+    }
+    #hashtag{
+        width:7%;
+    }
+    #v_hashtag{
+        width:25%;
+    }
+    #tickethead div:nth-child(1):before{
+        content:'#';
+    }
+    #voucherhead div:nth-child(1):before{
+        content:'#';
     }
     .amount:before{
         content: '\f3ff';
@@ -256,11 +261,14 @@
     .person:before{
         content: '\f2bb';
     }
-    .hashtag:before{
-        content: '#';
-        
+    #hashtag{
+        width:7%;
     }
-    .used:before{
+    
+    #used{
+        width:25%;
+    }
+    #voucherhead div:nth-child(4):before{
         content: '\f14a';
     }
     #toTop{
