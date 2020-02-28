@@ -57,11 +57,12 @@ require 'php-parts/just-for-admin.php';
         <div id="content">
         </div>
     </main>
-    <div id="CREATE"></div>
+    <?php require 'html-parts/create.html';?>
     <div id="STATISTIC"></div>
     <div id="ERD">
         <?php include "img/erd.svg";?>
     </div>
+    <div id="concert-info"><div></div></div>
     <?php include 'html-parts/footer.html';?>
     <a id="toTop" href="#"><i class="fas fa-arrow-up" aria-hidden="true"></i></a>
 </body>
