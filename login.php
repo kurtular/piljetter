@@ -1,6 +1,5 @@
 <?php
 session_start();
-$regmessages = "";
 if(isset($_GET['signout'])){
     session_destroy();
     header("location:login.php");
@@ -24,6 +23,7 @@ if(!isset($_SESSION['userId'])){
 $msg ="!! Felaktig användarnamn eller lösenord. !!";}
 }
 else if(isset($_POST['registrate'])){
+    $regmessages = "";
     $customerRole = 'customer';
     $firstName = $_POST['firstname'];
     $lastName = $_POST['lastname'];

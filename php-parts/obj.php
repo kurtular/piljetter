@@ -91,4 +91,22 @@ class voucher{
         
     }
 }
+class OverView{
+    public $concertId;
+    public $spending;
+    public $earning;
+    public $profit;
+    public $totalTickets;
+    public $soldTickets;
+    public $voucherTickets;
+    function __construct($concertId,$spending,$earning,$profit,$totalTickets,$soldTickets,$voucherTickets){
+        $this->concertId = $concertId;
+        $this->spending = $spending;
+        $this->earning = $earning;
+        $this->profit = $profit;
+        $this->totalTickets = $totalTickets;
+        $this->soldTickets = $soldTickets;
+        $this->voucherTickets = $voucherTickets;
+    }
+}
 ?>

@@ -269,6 +269,7 @@ main div::before{
     background-color: #1f1f1f;
     text-align: center;
     min-height: 80%;
+    display: none;
 }
 #STATISTIC{
     color: #fff;
@@ -280,6 +281,7 @@ main div::before{
     background-color: #1f1f1f;
     text-align: center;
     min-height: 80%;
+    display: none;
 }
 #ERD{
     overflow: auto;
@@ -288,7 +290,9 @@ main div::before{
     display: none;
     border-left:3px solid #ff2da9;
     border-right:3px solid #ff2da9;
+    display: none;
 }
+/*concert-overview popup*/
 #concert-info{
     width: 100%;
     height: 100%;
@@ -296,6 +300,65 @@ main div::before{
     position: fixed;
     top: 0;
     left: 0;
+    padding: 2% 0;
     display: none;
     z-index: 1;
+    overflow: auto;
+}
+#concert-info>div{
+    overflow: auto;
+    width: 80%;
+    margin: 0 auto;
+    border:3px solid #ff2da9;
+    background-color: #1f1f1f;
+    height: 100%;
+}
+#info-close{
+    float: right;
+    color: #ff2da9;
+}
+#info-close:hover{
+    color: #f64b3c;
+}
+#q-info{
+    color: #fff;
+    display: grid;
+    grid-template-columns: auto auto auto;
+    grid-template-rows: auto auto auto;
+    width: fit-content;
+    margin: 20px auto;
+    font-size: 1.5vw;
+    clear: both;
+}
+#q-info>div::before{
+color: #2ce4ff;
+font-size: 1vw;
+}
+#q-info>.hashtag{
+    grid-column-start: 2;
+    grid-column-end: 2;
+    grid-row-start: 1;
+    grid-row-end: 1;
+}
+#q-info>div:nth-child(2),
+#q-info>div:nth-child(3),
+#q-info>div:nth-child(4){
+    grid-row-start: 2;
+    margin: 10px;
+}
+#q-info>div:nth-child(5),
+#q-info>div:nth-child(6),
+#q-info>div:nth-child(7){
+    grid-row-start: 3;
+    margin: 10px;
+}
+#con-tic-pie{
+    width: 50%;
+    display: inline-block;
+    float: left;
+}
+#con-profit-bar{
+    width: 50%;
+    display: inline-block;
+    float: left;
 }
