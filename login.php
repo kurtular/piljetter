@@ -1,5 +1,6 @@
 <?php
 session_start();
+$regmessages = "";
 if(isset($_GET['signout'])){
     session_destroy();
     header("location:login.php");
@@ -23,7 +24,6 @@ if(!isset($_SESSION['userId'])){
 $msg ="!! Felaktig användarnamn eller lösenord. !!";}
 }
 else if(isset($_POST['registrate'])){
-    
     $customerRole = 'customer';
     $firstName = $_POST['firstname'];
     $lastName = $_POST['lastname'];
@@ -35,10 +35,20 @@ else if(isset($_POST['registrate'])){
     require 'php-parts/db-connection.php';
     $sql= "SELECT create_user('$userName', '$password', '$firstName', '$lastName', '$email', '$customerRole')  ";
     $stmt = $conn->prepare($sql);
+    try{
     $stmt->execute();
-    header("location:login.php");}
+    
+    header("location:login.php");
+    $regmessages = "Registration successful";}
+    catch(Exception $e){
+        $regmessages = "The username or email is already registrated in our system";
+    }
+    
+    }
     else {
-        $wrongpassreg = "wrong pass";
+      
+        $regmessages = "You have not entered matching passwords";
+        
     }
 }
     
@@ -98,8 +108,19 @@ else if(isset($_POST['registrate'])){
         </div>
     </div>
 <button name="registrate" type="submit" value="registrate">Registrera</button>
+<?php
+        if(isset($regmessages)&& $regmessages!=""){
+            echo "<h5 id='msg'>".$regmessages."</h5>";
+        }
+        ?>
+
 <span onclick='show("log")'>Logga in</span>
 </form>
 </body>
 <script src="js/login.js"></script>
+<?php
+        if(isset($regmessages)){
+            echo '<script> show("reg"); </script>';
+        }
+        ?>
 </html>

@@ -88,10 +88,16 @@ CREATE TABLE re_pesetas_tickets (
     refunded_pesetas int NOT NULL DEFAULT 0,
     "time" timestamp NOT NULL DEFAULT now()
 );
-/* */
+/*Two tables for separating vouchertickets and pesetastickets. Pesetastickets dont have a voucherid.*/
 CREATE TABLE pesetas_tickets (
     reg_id serial primary key CHECK (reg_id>0),
     ticket_id int UNIQUE NOT NULL REFERENCES tickets(ticket_id)
+);
+
+CREATE TABLE voucher_tickets (
+    reg_id serial primary key CHECK (reg_id>0),
+    ticket_id int UNIQUE NOT NULL REFERENCES tickets(ticket_id),
+    voucher_id int UNIQUE NOT NULL REFERENCES vouchers(voucher_id)
 );
 /*Stores all the given vouchers. Not much inserting here but the website do much reading here for the myprofilepage. Therefore the
 columns is indexed. A voucher is by default valid for 183 days.*/
@@ -102,13 +108,8 @@ CREATE TABLE vouchers (
     expire_date date NOT NULL check(expire_date>issued_date) DEFAULT (current_date+183),
     used boolean DEFAULT false NOT NULL
 );
-/**/
-CREATE TABLE voucher_tickets (
-    reg_id serial primary key CHECK (reg_id>0),
-    ticket_id int UNIQUE NOT NULL REFERENCES tickets(ticket_id),
-    voucher_id int UNIQUE NOT NULL REFERENCES vouchers(voucher_id)
-);
-/*Check that a user dont efford to buy a ticket. This is indexed because the website show this all the time.*/
+
+/*Check that balance is 0 or higher so a ticket cant be bought with no money. This is indexed because the website show this all the time.*/
 CREATE TABLE wallets (
     user_id int primary key CHECK (user_id>0) NOT NULL REFERENCES users(user_id),
     balance int DEFAULT 25 NOT NULL CHECK (balance>=0)
