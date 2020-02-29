@@ -131,3 +131,16 @@ END IF;
 END;
    $$
 LANGUAGE 'plpgsql';
+
+--Function to buy pesetas
+CREATE or replace FUNCTION pesetas_charging_function(userid int,depositsek int)
+RETURNS VOID AS $$
+DECLARE
+toCharge real := (SELECT pesetas_exchanging(depositsek));
+BEGIN
+INSERT INTO pesetas_charging (amount_pesetas,deposit_sek,user_id) VALUES
+(toCharge,depositsek,userid);
+UPDATE wallets SET balance = balance+toCharge WHERE wallets.user_id=userid;
+END;
+
+$$ language plpgsql;

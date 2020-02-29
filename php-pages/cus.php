@@ -23,7 +23,7 @@ if(isset($_POST["itemId"]) && $_POST["itemId"]!=""){
     exit();
 }
 if(isset($_POST["kronor"]) && $_POST["kronor"]!=""){
-    $sql= "INSERT into pesetas_charging (user_id,deposit_sek) Values ($_SESSION[userId],$_POST[kronor]);";
+    $sql= "SELECT pesetas_charging_function($_SESSION[userId],$_POST[kronor]);";
     $stmt = $conn->prepare($sql);
     $stmt->execute();
     $row = $stmt->fetch(PDO::FETCH_ASSOC);

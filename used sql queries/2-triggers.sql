@@ -92,7 +92,7 @@ CREATE TRIGGER refund_new_vouchers_tr AFTER UPDATE OF cancelled ON concerts
 FOR EACH ROW EXECUTE PROCEDURE refund_new_vouchers();
 
 /*Trigger to call the exchangefunction when depositing.*/
-CREATE FUNCTION Pesetas_charging()
+/*CREATE FUNCTION Pesetas_charging()
 RETURNS TRIGGER AS $$
 DECLARE
 toCharge real := (SELECT pesetas_exchanging(NEW.deposit_sek));
@@ -104,4 +104,4 @@ END;
 $$ language plpgsql;
 --
 CREATE TRIGGER pesetas_charging_tr AFTER INSERT ON pesetas_charging
-FOR EACH ROW EXECUTE PROCEDURE Pesetas_charging();
+FOR EACH ROW EXECUTE PROCEDURE Pesetas_charging();*/

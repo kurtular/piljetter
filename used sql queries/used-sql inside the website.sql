@@ -8,7 +8,7 @@ SELECT DISTINCT country FROM cities ORDER BY country
 SELECT DISTINCT city FROM cities ORDER BY city
 SELECT DISTINCT name FROM scenes ORDER BY name
 
---But tickets querys
+--Buy tickets querys
 SELECT buy_tickets_with_voucher($_POST[itemId],$_SESSION[userId],$_POST[vouchId]);
 SELECT buy_tickets_with_pesetas($_POST[itemId],$_SESSION[userId]);
 
