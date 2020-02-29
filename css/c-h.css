@@ -5,6 +5,7 @@
     font-family: 'Sofia', cursive;*/
 
 /**Page Content**/
+@import 'rang.css'; 
 main{
     color: #fff;
     padding:10px 0;
@@ -258,40 +259,6 @@ main div::before{
 .hashtag:before{
     content: '#';
 }
-/**/
-#CREATE{
-    color: #fff;
-    padding:10px 0;
-    width: 90%;
-    margin: 0 auto ;
-    border-left:3px solid #ff2da9;
-    border-right:3px solid #ff2da9;
-    background-color: #1f1f1f;
-    text-align: center;
-    min-height: 80%;
-    display: none;
-}
-#STATISTIC{
-    color: #fff;
-    padding:10px 0;
-    width: 90%;
-    margin: 0 auto ;
-    border-left:3px solid #ff2da9;
-    border-right:3px solid #ff2da9;
-    background-color: #1f1f1f;
-    text-align: center;
-    min-height: 80%;
-    display: none;
-}
-#ERD{
-    overflow: auto;
-    width: 90%;
-    margin: 0 auto;
-    display: none;
-    border-left:3px solid #ff2da9;
-    border-right:3px solid #ff2da9;
-    display: none;
-}
 /*concert-overview popup*/
 #concert-info{
     width: 100%;
@@ -332,13 +299,15 @@ main div::before{
 }
 #q-info>div::before{
 color: #2ce4ff;
-font-size: 1vw;
+font-size: 0.9vw;
+    width: 3vw;
 }
 #q-info>.hashtag{
     grid-column-start: 2;
     grid-column-end: 2;
     grid-row-start: 1;
     grid-row-end: 1;
+    text-align: center;
 }
 #q-info>div:nth-child(2),
 #q-info>div:nth-child(3),
@@ -361,4 +330,124 @@ font-size: 1vw;
     width: 50%;
     display: inline-block;
     float: left;
+}
+/*sub-pages*/
+/*createing sub-page*/
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+#CREATE{
+    color: #fff;
+    padding:10px 0;
+    width: 90%;
+    margin: 0 auto ;
+    border-left:3px solid #ff2da9;
+    border-right:3px solid #ff2da9;
+    background-color: #1f1f1f;
+    text-align: center;
+    min-height: 80%;
+    display: none;
+}
+#CREATE label{
+    color: #2ce4ff;
+    font-family: 'Sofia', cursive;
+    font-size: 1.5vw;
+}
+#CREATE label>p{
+display: inline-block;
+font-size: 1vw;
+}
+#CREATE label>p::before{
+    content: "(";
+    display: inline-block;
+    font-size: 1vw;
+    font-family: inherit !important;
+    width: auto !important;
+    vertical-align: inherit;
+    }
+#CREATE label>p::After{
+    content: ")";
+    display: inline-block;
+    font-size: 1vw;
+    }
+#CREATE input,#CREATE select{
+    width: 30vw;
+    height:5vh;
+    padding: 5px 10px; 
+    border-radius:50px; 
+    background-color: #1f1f1f;
+    color: #2ce4ff;
+    border:2px solid#ff2da9;
+    outline: none;
+    font-size: 1.2vw;
+    font-family: 'Nova Flat', cursive;
+}
+#CREATE select{
+top: 50%;
+position: relative;
+}
+#CREATE input::placeholder{color: #ff2da9;}
+#CREATE > form{
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-row-gap: 2vh;
+    padding: 4vh 0;
+    border-bottom:3px solid #2ce4ff;
+}
+#CREATE > form>h1{
+    grid-row-start: 1;
+    grid-row-end: 1;
+    grid-column-start:1;
+    grid-column-end: 3;
+    color: #ff2da9;
+    font-family: 'Sofia', cursive;
+    font-size: 2vw;
+}
+#CREATE > form>button[type='submit']{
+    grid-column-start: 1;
+    grid-column-end: 3;
+    min-width: 35%;
+    width: fit-content;
+    margin: auto;
+    padding: 5px 20px; 
+    border-radius:50px; 
+    background-color: #1f1f1f;
+    color: #2ce4ff;
+    border:2px solid#ff2da9;
+    cursor: pointer;
+    outline: none;
+    font-size: 1.5vw;
+    font-family: 'Sofia', cursive;
+}
+#CREATE > form>button[type='submit']:hover{
+    border:2px solid #2ce4ff;
+    color: #ff2da9;
+}
+#new-conc-scene option{
+    font-size: 0.7vw;
+}
+/**/
+#STATISTIC{
+    color: #fff;
+    padding:10px 0;
+    width: 90%;
+    margin: 0 auto ;
+    border-left:3px solid #ff2da9;
+    border-right:3px solid #ff2da9;
+    background-color: #1f1f1f;
+    text-align: center;
+    min-height: 80%;
+    display: none;
+}
+/**/
+#ERD{
+    overflow: auto;
+    width: 90%;
+    margin: 0 auto;
+    display: none;
+    border-left:3px solid #ff2da9;
+    border-right:3px solid #ff2da9;
+    display: none;
 }
