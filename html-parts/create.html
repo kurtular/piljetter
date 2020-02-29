@@ -1,5 +1,110 @@
 <div id="CREATE">
-<form action="">
-    
-</form>
+    <form id="concert_form">
+        <h1>Skapa en ny konsert.</h1>
+        <div>
+            <select id="new-conc-artist" required>
+                <option disabled selected value="">Välja en artist</option>
+            </select>
+        </div>
+        <div>
+            <select id="new-conc-scene" required>
+                <option disabled selected value="">Välja en scene</option>
+            </select>
+        </div>
+        <div>
+            <label for="new-conc-tickets" >Antal giltiga biljetter.</label><br>
+            <input type="number" min ="1" id="new-conc-tickets" placeholder="Inmata ett positiv tal" required>
+        </div>
+        <div>
+            <label for="c-date">konsert datum</label><br>
+            <input type="date" id="new-con-date" required>
+        </div>
+        <div>
+            <label for="time">konsert tid</label><br>
+            <input type="time" id="new-con-time" required>
+        </div>
+        <button type="submit">skapa ny konsert</button>
+    </form>
+    <form id="artist_form">
+        <h1>Addera en ny artist till artister lista.</h1>
+        <div>
+            <label for="new-art-name" >Namn.</label><br>
+            <input type="text" id="new-art-name" required placeholder="Inmata artist namn/alias">
+        </div>
+        <div>
+            <label for="ny-art-popularity">Popularitet. <p id='popularity-value'></p></label><br>
+            <input type="range" id="ny-art-popularity" min="1" max="1000" onchange="shRange('popu')" required>
+        </div>
+        <button type="submit">Addera artisten</button>
+    </form>
+    <form id="scene_form">
+        <h1>Addera ny scene till scenerna.</h1>
+        <div>
+            <label for="new-sce-name">Namn.</label><br>
+            <input type="text" id="new-sce-name" required placeholder="Inmata scene namn.">
+        </div>
+        <div>
+            <label for="new-sce-rate">renommé. <p id='rate-value'></p></label><br>
+            <input type="range" id="ny-sce-rate" min="1" max="400" onchange="shRange('rate')" required>
+        </div>
+        <div>
+            <label for="new-sce-capacity" >capcitet.</label><br>
+            <input type="number" min="1" id="new-sce-capacity" required placeholder="Inmata scene capcitet (Antal personer kan tas emot)">
+        </div>
+        <div>
+            <label for="new-sce-address" >adress.</label><br>
+            <input type="text" id="new-sce-address" required placeholder="Inmata scenen adress.">
+        </div>
+        <div>
+            <label for="new-sce-zip" >zip kode.</label><br>
+            <input type="text" id="new-art-zip" required placeholder="Inmata zip koden.">
+        </div>
+        <div>
+            <select id="new-sce-city" required>
+                <option disabled selected value="">Välja en stad</option>
+            </select>
+        </div>
+
+        <button type="submit">skapa ny konsert</button>
+    </form>
+    <form id="city_form">
+        <h1>Addera en ny stad.</h1>
+        <div>
+            <label for="new-cit-name">Stad namn.</label><br>
+            <input type="text" id="new-city" required placeholder="Inmata stad namn">
+        </div>
+        <div>
+            <label for="new-cou-name" >Land namn.</label><br>
+            <input type="text" id="new-country" required placeholder="Inmata land namnet">
+        </div>
+        <button type="submit">skapa ny konsert</button>
+    </form>
+    <form id="admin_form">
+        <h1>Skaffa en ny administratör konto.</h1>
+        <div>
+            <label for="firstname"><b>Förnamn</b></label><br>
+            <input type="text" id="new-adm-firstname" required placeholder="Inmata förnamnet">
+        </div>
+        <div>
+            <label for="lastname"><b>Efternamn</b></label><br>
+            <input type="text" id="new-adm-lastname" required placeholder="Inmata efternamnet">
+        </div>
+        <div>
+            <label for="email"><b>Email</b></label><br>
+            <input type="email" id="new-adm-email" required placeholder="Inmata epost">
+        </div>
+        <div>
+            <label for="username"><b>Användarnamn</b></label><br>
+            <input type="text" id="new-adm-username" required placeholder="Inmata användnamn">
+        </div>
+        <div>
+            <label for="password"><b>Lösenord</b></label><br>
+            <input type="password" id="new-adm-password" required placeholder="Inmata lösenord">
+        </div>
+        <div>
+            <label for="repeatpassword"><b>Repetera lösenord</b></label><br>
+            <input type="password" id="new-adm-repassword" required placeholder="Inmata lösenord en gång till">
+        </div>
+        <button type="submit">Registrera</button>
+    </form>
 </div>

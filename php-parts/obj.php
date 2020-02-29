@@ -109,4 +109,13 @@ class OverView{
         $this->voucherTickets = $voucherTickets;
     }
 }
+class Option{
+    public $id;
+    public $value;
+    function __construct($id,$value){
+        $this->id = $id;
+        $this->value= $value;
+        
+    }
+}
 ?>
