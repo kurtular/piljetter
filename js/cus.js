@@ -16,6 +16,8 @@ function ajax(link, methodToCall,post) {
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
+      if(methodToCall=="showResponse")
+      console.log(this.responseText);
       var data = JSON.parse(this.responseText);
       // TO check which action will be done.
       switch (methodToCall) {
@@ -61,10 +63,10 @@ function showUserNb(data) {
   }
 }
 function buy(itemId) {
-  if (itemId != null && window.confirm('Är du säker om att köpa en biljett?')) {
+  if (itemId != null && window.confirm('Är du säker om att köpa en biljett?\n !!Du kan inte avbryta processen sen!!')) {
     if(window.confirm("Skulle du använda en kupong för det?")){
       var voucherId;
-      voucherId=window.prompt("Inmata gärna din kupong id");
+      voucherId=window.prompt("Inmata gärna din kupong id:\n I fall du lämnar rutan tom kommer systemet att dra pesetas istället.");
       if(voucherId !=null){console.log(voucherId);ajax("php-pages/cus.php", "showResponse",`itemId=${itemId}&vouchId=${voucherId}`);}
     }else{
       ajax("php-pages/cus.php", "showResponse",`itemId=${itemId}`);
@@ -72,7 +74,6 @@ function buy(itemId) {
     reloadContent();
   }
 }
-
 
 function showTickets(data) {
   var content = document.getElementById("tickets");

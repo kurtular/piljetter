@@ -20,3 +20,12 @@ con.ticket_price,
 FROM tickets AS tic,
 concerts AS con
 group by con.concert_id,con.ticket_price,con.spending) AS result;
+
+/*funkar*/
+CREATE VIEW total_income_tickets_amount AS
+SELECT date,SUM(amount_tickets) AS amount_sold_tickets,SUM(income) AS total_income FROM 
+(SELECT date(t.purchase_date),count(*) AS amount_tickets,(c.ticket_price*count(*)) AS income
+FROM pesetas_tickets AS pt,tickets AS t,concerts AS c 
+where t.concert_id=c.concert_id AND pt.ticket_id=t.ticket_id
+GROUP BY date(t.purchase_date),c.ticket_price) AS income_by_concert
+GROUP BY date;

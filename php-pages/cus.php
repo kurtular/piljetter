@@ -11,14 +11,18 @@ if(isset($_POST["itemId"]) && $_POST["itemId"]!=""){
         $sql= "SELECT buy_tickets_with_pesetas($_POST[itemId],$_SESSION[userId]);";
     }
     $stmt = $conn->prepare($sql);
+    try{
     $stmt->execute();
-    //should return just one row.
-    $row = $stmt->fetch(PDO::FETCH_ASSOC);
-    if(isset($row['msg']) && $row['msg']!=""){
-        $msg = '{"msg":"'.$row['msg'].'"}';
-        echo $msg;
-    }else{
-        echo  '{"msg":"done"}';
+    echo '{"msg":"Det gick bra med att köpa biljetten.!! Ha det roligt !!"}';
+    }catch(Exception $e){
+        if(strpos($stmt->errorInfo()[2],"Du har inte tillräckligt pesetas")){
+            echo '{"msg":"Tyvärr! Det gick inte att köpa biljetten. !!Du har inte tillräckligt pesetas!!"}';
+        }else if(strpos($stmt->errorInfo()[2],"Denna kupong id är ogiltigt.")){
+            echo '{"msg":"Tyvärr! Det gick inte att köpa biljetten.Denna kupong id är ogiltigt."}';
+        }else if(strpos($stmt->errorInfo()[2],"Denna kupong är ogiltigt längre.")){
+            echo '{"msg":"Tyvärr! Det gick inte att köpa biljetten.Denna kupong är ogiltigt längre."}';
+        }else
+        echo '{"msg":"Tyvärr! Det gick inte att köpa biljetten."}';
     }
     exit();
 }
