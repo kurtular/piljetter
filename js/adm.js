@@ -132,8 +132,8 @@ function conOverview(data) {
             document.querySelector("#q-info > .price").innerHTML = document.querySelector(`.concert[item-id='${data.concertId}'] > .price`).innerHTML;
             document.querySelector("#q-info > .amount").innerHTML = data.totalTickets + " totala biljetter.";
             var remainingTickets = data.totalTickets - (data.soldTickets + data.voucherTickets);
-            showchart("Kupongersläge.", "#con-tic-pie>canvas", "pie", ["Sålda med pesetas.", "Bokade med kuponger", "Antal biljetter kvar."], [data.soldTickets, data.voucherTickets, remainingTickets], ["#75daad", "#f1f3f4", "#f64b3c"], "");
-            showchart("Ekonomiskt.", "#con-profit-bar>canvas", "bar", ["Kostnaden med pesetas.", "Tjänade pesetas.", "Vinst."], [data.spending, data.earning, data.profit], ["#f64b3c", "#75daad", "#beebe9"], "");
+            showchart("Kupongersläge.", "#con-tic-pie", "pie", ["Sålda med pesetas.", "Bokade med kuponger", "Antal biljetter kvar."], [data.soldTickets, data.voucherTickets, remainingTickets], ["#75daad", "#f1f3f4", "#f64b3c"], "");
+            showchart("Ekonomiskt.", "#con-profit-bar", "bar", ["Kostnaden med pesetas.", "Tjänade pesetas.", "Vinst."], [data.spending, data.earning, data.profit], ["#f64b3c", "#75daad", "#beebe9"], "");
             conOverviewData = data;
             showConOverview("show");
         }
@@ -148,9 +148,11 @@ function showchart(chartTitle, ref, chartType, datalabels, chartData, bkcolors, 
         disvalue = true;
     }
     Chart.defaults.global.defaultFontColor = "#fff";
-    var ctx = document.querySelector(ref).getContext('2d');
+    document.querySelector(ref).removeChild(document.querySelector(ref+">canvas"));
+    document.querySelector(ref).appendChild(document.createElement('canvas'));
+    var ctx = document.querySelector(ref+">canvas").getContext('2d');
     if (chartOptions == "") { chartOptions = "scales: {yAxes: [{ticks: {beginAtZero: true}}]}"; }
-    var myChart = new Chart(ctx, {
+    new Chart(ctx, {
         type: chartType,
         data: {
             labels: datalabels,
