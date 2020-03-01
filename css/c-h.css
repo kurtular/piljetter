@@ -441,6 +441,41 @@ position: relative;
     min-height: 80%;
     display: none;
 }
+#STATISTIC h1{
+    color: #ff2da9;
+    font-family: 'Sofia', cursive;
+    font-size: 2vw;
+}
+#STATISTIC>div{
+    padding: 4vh 0;
+    border-bottom:3px solid #2ce4ff;
+}
+#STATISTIC>div>div{
+    display: grid;
+    grid-template-columns: 50% 50%;
+}
+#STATISTIC input{
+    width: 30vw;
+    height:5vh;
+    padding: 5px 10px; 
+    border-radius:50px; 
+    background-color: #1f1f1f;
+    color: #2ce4ff;
+    border:2px solid#ff2da9;
+    outline: none;
+    font-size: 1.2vw;
+    font-family: 'Nova Flat', cursive;
+    text-align: center;
+}
+#STATISTIC label{
+    color: #2ce4ff;
+    font-family: 'Sofia', cursive;
+    font-size: 1.5vw;
+}
+#active-vouchers-sta,#sold-tickets-sta,#ten-best-artists-sta{
+    width: 50%;
+    margin: auto;
+}
 /**/
 #ERD{
     overflow: auto;

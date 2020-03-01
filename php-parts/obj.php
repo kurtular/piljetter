@@ -118,4 +118,30 @@ class Option{
         
     }
 }
+class ActiveSta{
+    public $months;
+    public $values;
+    function __construct($months,$values){
+        $this->months = $months;
+        $this->values= $values;
+    }
+}
+class BestSta{
+    public $artists;
+    public $sold;
+    function __construct($artists,$sold){
+        $this->artists = $artists;
+        $this->sold= $sold;
+    }
+}
+class SoldSta{
+    public $date;
+    public $income;
+    public $tickets;
+    function __construct($date,$income,$tickets){
+        $this->date = $date;
+        $this->income= $income;
+        $this->tickets= $tickets;
+    }
+}
 ?>

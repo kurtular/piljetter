@@ -52,6 +52,7 @@ END;
 $$
 LANGUAGE 'plpgsql' SECURITY DEFINER;
 
+<<<<<<< HEAD
 --Function to use to check total tickets sold in a period.
 CREATE FUNCTION  total_tickets_in_period(from_date timestamp(6) without time zone,to_date timestamp(6) without time zone)
 RETURNS integer AS $$
@@ -75,6 +76,9 @@ RETURN total_income;
 END; $$
 LANGUAGE 'plpgsql';
 --Function to get the top ten best selling artists in a period.
+=======
+/*funkar*/
+>>>>>>> 7335bb41892b1bdfb7ea192eff3385c71af6d03c
 CREATE FUNCTION best_selling_artists ( fromDate timestamp(6) without time zone, toDate timestamp(6) without time zone)
 RETURNS  TABLE (artist_id integer,artist_name varchar,popularity smallint,tickets_sold bigint) AS $$
 BEGIN
@@ -96,11 +100,14 @@ valid_voucher boolean;
 get_expire_date date ;
 BEGIN
 IF EXISTS (SELECT * FROM concerts where concert_id= new_concert_id AND cancelled=false) THEN
-IF EXISTS (SELECT * FROM vouchers WHERE voucher_id = new_voucher_id AND used=false AND user_id=new_user_id) THEN valid_voucher = 'true'; 
+IF EXISTS (SELECT * FROM vouchers WHERE voucher_id = new_voucher_id AND used=false AND user_id=new_user_id) THEN 
+valid_voucher = 'true'; 
+ELSE RAISE EXCEPTION 'Denna kupong id är ogiltigt.';
 END IF;
 get_expire_date = expire_date FROM vouchers WHERE  vouchers.voucher_id = new_voucher_id;
 IF (valid_voucher = 'true'  AND get_expire_date >= CURRENT_DATE)  THEN
 INSERT INTO tickets (concert_id, user_id) VALUES (new_concert_id, new_user_id) returning ticket_id INTO get_ticket_id;
+ELSE RAISE EXCEPTION 'Denna kupong är ogiltigt längre.';
 END IF;
 IF (get_ticket_id IS NOT NULL) THEN
 INSERT INTO voucher_tickets (ticket_id,voucher_id) VALUES (get_ticket_id,new_voucher_id);
@@ -123,7 +130,8 @@ IF EXISTS (SELECT * FROM concerts where concert_id= new_concert_id AND cancelled
 actual_ticket_price = ticket_price FROM concerts WHERE concerts.concert_id = new_concert_id;
 get_wallet_balance = balance FROM wallets WHERE wallets.user_id = new_user_id;
 IF (get_wallet_balance >= actual_ticket_price)  THEN
-INSERT INTO tickets (concert_id, user_id) VALUES (new_concert_id, new_user_id) returning ticket_id INTO get_ticket_id;
+INSERT INTO tickets (concert_id,user_id) VALUES (new_concert_id,new_user_id) returning ticket_id INTO get_ticket_id;
+ELSE RAISE EXCEPTION 'Du har inte tillräckligt pesetas';
 END IF;
 IF (get_ticket_id IS NOT NULL) THEN INSERT INTO pesetas_tickets (ticket_id) VALUES (get_ticket_id);
 END IF;

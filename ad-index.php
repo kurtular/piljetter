@@ -59,7 +59,7 @@ require 'php-parts/just-for-admin.php';
         </div>
     </main>
     <?php require 'html-parts/create.html';?>
-    <div id="STATISTIC"></div>
+    <?php require 'html-parts/statistic.php';?>
     <div id="ERD">
         <?php include "img/erd.svg";?>
     </div>

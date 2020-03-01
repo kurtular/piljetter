@@ -10,6 +10,7 @@ function reloadContent() {
     ajax("php-pages/adm.php", "showUserN", "");
     conOverview("update");
     createPg("update");
+    updateSta("update");
 }
 function ajax(link, methodToCall, post) {
     var xhttp = new XMLHttpRequest();
@@ -23,6 +24,7 @@ function ajax(link, methodToCall, post) {
                 case "showResponse": alert(data.msg); break;
                 case "conOverview": conOverview(data); break;
                 case "createPg": createPg(data); break;
+                case "updateSta": updateSta(data); break;
                 default:console.log("There are no this option."); ;
             }
         }
@@ -95,7 +97,7 @@ function show(obj) {
     switch (obj.innerHTML) {
         case "Hem": home.style.display = "block"; break;
         case "skapa": create.style.display = "block"; createPg("update"); break;
-        case "Statistik": statistic.style.display = "block"; break;
+        case "Statistik": statistic.style.display = "block";  updateSta("update");break;
         case "ERD": erd.style.display = "block"; break;
         default: home.style.display = "block"; break;
     }
@@ -132,15 +134,19 @@ function conOverview(data) {
             document.querySelector("#q-info > .price").innerHTML = document.querySelector(`.concert[item-id='${data.concertId}'] > .price`).innerHTML;
             document.querySelector("#q-info > .amount").innerHTML = data.totalTickets + " totala biljetter.";
             var remainingTickets = data.totalTickets - (data.soldTickets + data.voucherTickets);
-            showchart("Kupongersläge.", "#con-tic-pie", "pie", ["Sålda med pesetas.", "Bokade med kuponger", "Antal biljetter kvar."], [data.soldTickets, data.voucherTickets, remainingTickets], ["#75daad", "#f1f3f4", "#f64b3c"], "");
-            showchart("Ekonomiskt.", "#con-profit-bar", "bar", ["Kostnaden med pesetas.", "Tjänade pesetas.", "Vinst."], [data.spending, data.earning, data.profit], ["#f64b3c", "#75daad", "#beebe9"], "");
+            showChart("Kupongersläge.", "#con-tic-pie", "pie", ["Sålda med pesetas.", "Bokade med kuponger", "Antal biljetter kvar."], [data.soldTickets, data.voucherTickets, remainingTickets], ["#75daad", "#f1f3f4", "#f64b3c"], "");
+            if(data.profit>=0){
+            showChart("Ekonomiskt.", "#con-profit-bar", "bar", ["Kostnaden med pesetas.", "Tjänade pesetas.", "Vinst."], [data.spending, data.earning, data.profit], ["#f64b3c", "#75daad", "#f7d695"], "");
+            }else{
+            showChart("Ekonomiskt.", "#con-profit-bar", "bar", ["Kostnaden med pesetas.", "Tjänade pesetas.", "Vinst."], [data.spending, data.earning, data.profit], ["#f64b3c", "#75daad", "#9d0b0b"], "");
+            }
             conOverviewData = data;
             showConOverview("show");
         }
     }
 }
 /*To create an show a chart */
-function showchart(chartTitle, ref, chartType, datalabels, chartData, bkcolors, chartOptions) {
+function showChart(chartTitle, ref, chartType, datalabels, chartData, bkcolors, chartOptions) {
     var disvalue;
     if (chartType == "bar") {
         disvalue = false;
@@ -152,6 +158,7 @@ function showchart(chartTitle, ref, chartType, datalabels, chartData, bkcolors, 
     document.querySelector(ref).appendChild(document.createElement('canvas'));
     var ctx = document.querySelector(ref+">canvas").getContext('2d');
     if (chartOptions == "") { chartOptions = "scales: {yAxes: [{ticks: {beginAtZero: true}}]}"; }
+    
     new Chart(ctx, {
         type: chartType,
         data: {
@@ -161,6 +168,43 @@ function showchart(chartTitle, ref, chartType, datalabels, chartData, bkcolors, 
                 backgroundColor: bkcolors,
                 borderWidth: 1
             }]
+        },
+        options: { aspectRatio: 1.2, responsive: true, legend: { display: disvalue, position: 'top' }, title: { display: true, text: chartTitle } }
+    });
+}
+function showDChart(chartTitle, ref, chartType,diglabels,datalabels, chartData, bkcolors,bordercolors, chartOptions) {
+    var disvalue;
+    if (chartType == "bar") {
+        disvalue = false;
+    } else {
+        disvalue = true;
+    }
+    Chart.defaults.global.defaultFontColor = "#fff";
+    document.querySelector(ref).removeChild(document.querySelector(ref+">canvas"));
+    document.querySelector(ref).appendChild(document.createElement('canvas'));
+    var ctx = document.querySelector(ref+">canvas").getContext('2d');
+    if (chartOptions == "") { chartOptions = "scales: {yAxes: [{ticks: {beginAtZero: true}}]}"; }
+    
+    new Chart(ctx, {
+        type: chartType,
+        data: {
+            labels: diglabels,
+            datasets: [
+                {
+                label:datalabels[0],
+                data: chartData[0],
+                backgroundColor: bkcolors[0],
+                borderColor: bordercolors[0],
+                borderWidth: 1
+            },
+            {
+                label:datalabels[1],
+                data: chartData[1],
+                backgroundColor: bkcolors[1],
+                borderColor: bordercolors[1],
+                borderWidth: 3
+            }
+        ]
         },
         options: { aspectRatio: 1.2, responsive: true, legend: { display: disvalue, position: 'top' }, title: { display: true, text: chartTitle } }
     });
@@ -301,4 +345,43 @@ function createSubmit(data) {
         }
         createPg("update");
     }
+}
+
+/* STATISTIC sub-page*/
+var glSoldSta = "";
+var glBestSta = "";
+var glActiveSta = "";
+function updateSta(data){
+    if (document.getElementById("STATISTIC").style.display == "block") {
+        if (data == "update") {
+            var fSold = document.getElementById("from-sold-date").value;
+            var tSold = document.getElementById("to-sold-date").value;
+            var fBest = document.getElementById("from-best-date").value;
+            var tBest = document.getElementById("to-best-date").value;
+            var fActive = document.getElementById("from-active-date").value;
+            var tActive = document.getElementById("to-active-date").value;
+            ajax("php-pages/adm.php", "updateSta", `updateSta&fSold=${fSold}&tSold=${tSold}&fBest=${fBest}&tBest=${tBest}&fActive=${fActive}&tActive=${tActive}`);
+        } else {
+            if (JSON.stringify(glSoldSta) != JSON.stringify(data.soldSta)) {
+                showDChart("Notera att det kan behövas att gömmas försäljningsintäkt för att se antal sålda biljetter.","#sold-tickets-sta", "line",data.soldSta.date,["Total försäljningsintäkt (baserat på pesetas)","Antal sålda biljetter."],[data.soldSta.income,data.soldSta.tickets], ["#35477d","#a3f7bf"],["#beebe9","#29a19c"], "");
+                glSoldSta = data.soldSta;
+            }
+            if (JSON.stringify(glBestSta) != JSON.stringify(data.bestSta)) {
+                showChart("Mest säljande artisterna med antal sålda biljetter.","#ten-best-artists-sta", "bar",data.bestSta.artists, data.bestSta.sold, ["#ffe75e","#75daad", "#64b2cd", "#f64b3c","#beebe9","#a7e9af","#7fcd91","#3e206d","#e6b2c6","#c9d1d3"], "");
+                glBestSta = data.bestSta;
+            }
+            if (JSON.stringify(glActiveSta) != JSON.stringify(data.activeSta)) {
+                var colors=data.activeSta.months.length;
+                showChart("Antal utgivna kuponger med deras utgångs månad","#active-vouchers-sta", "bar",data.activeSta.months, data.activeSta.values,randomColor(colors), "");
+                glActiveSta = data.activeSta;
+            }
+        }
+    }
+}
+function randomColor(amount){
+    var returned=[];
+    for(var i=0;i<amount;i++){
+        returned[i]= "#"+(Math.floor(Math.random()*16777215+1049000).toString(16));
+    }
+    return returned;
 }

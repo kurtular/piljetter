@@ -87,6 +87,61 @@ if(isset($_POST["createAdmin"]) && isset($_POST["fname"])&& $_POST["fname"]!="" 
 }
 
 //show data
+//statistic sub page
+if(isset($_POST["updateSta"]) && isset($_POST["fSold"]) && isset($_POST["fSold"])&& isset($_POST["tSold"]) && isset($_POST["tSold"])&& isset($_POST["fBest"]) && isset($_POST["fBest"])&& isset($_POST["tBest"]) && isset($_POST["tBest"])&& isset($_POST["fActive"]) && isset($_POST["fActive"])&& isset($_POST["tActive"]) && isset($_POST["tActive"])){
+    $sql="SELECT * FROM total_income_tickets_amount WHERE date >= '$_POST[fSold]' AND date <= '$_POST[tSold]'";
+    $stmt = $conn->prepare($sql);
+    $stmt->execute();
+    $date=[];
+    $income=[];
+    $tickets=[];
+    $i=0;
+    while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
+        $date[$i] = $row['date'];
+        $income[$i] = $row['total_income'];
+        $tickets[$i] = $row['amount_sold_tickets'];
+        $i++; 
+    }
+    $soldsta = new SoldSta($date,$income,$tickets);
+    
+    /**/
+    $sql="SELECT CONCAT_WS(' ','#',artist_id,artist_name)AS artist,tickets_sold FROM best_selling_artists('$_POST[fBest]','$_POST[tBest]')";
+    $stmt = $conn->prepare($sql);
+    $stmt->execute();
+    $artists=[];
+    $sold=[];
+    $i=0;
+    while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
+        $artists[$i] = $row['artist']." ";
+        $sold[$i] = $row['tickets_sold'];
+        $i++; 
+    }
+    $beststa = new BestSta($artists,$sold);
+
+    /**/
+    $sql="SELECT * FROM public.unused_vouchers_statistic WHERE expire_month >= '$_POST[fActive]' AND expire_month <= '$_POST[tActive]'";
+    $stmt = $conn->prepare($sql);
+    $stmt->execute();
+    $months=[];
+    $amountVouchers=[];
+    $i=0;
+    while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
+        $months[$i] = $row['expire_month'];
+        $amountVouchers[$i] = $row['amount_vouchers'];
+        $i++; 
+    }
+    $activesta = new ActiveSta($months,$amountVouchers);
+
+    /* */
+    echo '{"soldSta":';
+    echo json_encode($soldsta,JSON_PRETTY_PRINT);
+    echo ',"bestSta":';
+    echo json_encode($beststa,JSON_PRETTY_PRINT);
+    echo ',"activeSta":';
+    echo json_encode($activesta,JSON_PRETTY_PRINT);
+    echo '}';
+    exit();
+}
 //concert overview
 if(isset($_POST["overview"]) && $_POST["overview"]!=""){
     $sql= "SELECT * FROM concerts_profit_statistic WHERE concert_id= $_POST[overview]";
