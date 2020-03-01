@@ -1,3 +1,5 @@
+--If a query is missing it can be found in the php-pages folder.
+
 --ADMIN
 
 --To show all concerts in admin page.
@@ -43,6 +45,12 @@ SELECT create_user('$_POST[uname]','$_POST[psw]','$_POST[fname]','$_POST[lname]'
 
 --Get userinformation about admin
 SELECT concat(u.first_name,' ',u.last_name) AS NAME FROM users AS u WHERE u.user_id = $_SESSION[userId]
+
+--Show statistic about total income and amount sold tickets
+SELECT * FROM total_income_tickets_amount WHERE date >= '$_POST[fSold]' AND date <= '$_POST[tSold]'
+
+--Showing the best selling artists statistic
+SELECT CONCAT_WS(' ','#',artist_id,artist_name)AS artist,tickets_sold FROM best_selling_artists('$_POST[fBest]','$_POST[tBest]')
 
 --CUSTOMER
 
@@ -92,7 +100,3 @@ SELECT c.concert_id,a.name AS artist_name,s.name AS scene_name,s.address,concat(
 --LOGIN
 --To get user_id and role when logging in.
 SELECT u.user_id,r.role FROM users AS u,roles as r WHERE r.role_id=u.role_id AND user_name='$userName' AND password='$password'
-
-
-
-

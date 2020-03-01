@@ -52,33 +52,7 @@ END;
 $$
 LANGUAGE 'plpgsql' SECURITY DEFINER;
 
-<<<<<<< HEAD
---Function to use to check total tickets sold in a period.
-CREATE FUNCTION  total_tickets_in_period(from_date timestamp(6) without time zone,to_date timestamp(6) without time zone)
-RETURNS integer AS $$
-DECLARE total_tickets integer;
-BEGIN
-total_tickets =  count(*)  from tickets  where purchase_date > from_date AND purchase_date < to_date;
-RETURN total_tickets;
-END;
-$$
-LANGUAGE 'plpgsql';
---Function to get total income in a period.
-CREATE FUNCTION  total_income_in_period(from_date timestamp(6) without time zone,to_date timestamp(6) without time zone)
-RETURNS integer AS $$
-DECLARE total_income integer;
-BEGIN
-total_income = SUM(total) FROM
-(SELECT  count(*),concerts.ticket_price, count(*)*concerts.ticket_price AS total  from tickets, concerts where purchase_date > from_date AND
- purchase_date < to_date
-AND concerts.concert_id = tickets.concert_id GROUP BY ticket_price) as sum_total_income;
-RETURN total_income;
-END; $$
-LANGUAGE 'plpgsql';
---Function to get the top ten best selling artists in a period.
-=======
 /*funkar*/
->>>>>>> 7335bb41892b1bdfb7ea192eff3385c71af6d03c
 CREATE FUNCTION best_selling_artists ( fromDate timestamp(6) without time zone, toDate timestamp(6) without time zone)
 RETURNS  TABLE (artist_id integer,artist_name varchar,popularity smallint,tickets_sold bigint) AS $$
 BEGIN
