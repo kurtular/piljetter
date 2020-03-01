@@ -1,7 +1,6 @@
 <?php
 header("Content-type: application/json; charset=utf-8");
 require '../php-parts/login-check.php';
-//require '../php-parts/db-connection.php';
 require '../php-parts/obj.php';
 require '../php-parts/just-for-customer.php';
 if(isset($_POST["itemId"]) && $_POST["itemId"]!=""){

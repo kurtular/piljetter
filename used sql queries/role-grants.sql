@@ -131,7 +131,10 @@ GRANT INSERT, SELECT, UPDATE, REFERENCES, TRIGGER ON TABLE public.cities TO admi
 
 GRANT INSERT, SELECT, UPDATE, REFERENCES, TRIGGER ON TABLE public.artists TO admin;
 
-GRANT INSERT, SELECT, UPDATE, REFERENCES, TRIGGER ON TABLE public.concerts_profit_statistic TO admin;
+GRANT SELECT ON TABLE public.concerts_profit_statistic TO admin;
 
-GRANT INSERT, SELECT, UPDATE, REFERENCES, TRIGGER ON TABLE public.unused_vouchers_statistic TO admin;
+GRANT SELECT ON TABLE public.unused_vouchers_statistic TO admin;
+
+GRANT SELECT ON TABLE public.total_income_tickets_amount TO admin;
+
 
