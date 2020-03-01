@@ -2,8 +2,13 @@
 //error_reporting(0);
 $servername = "localhost";
 $db="piljetter";
-$userN = "postgres";
-$pass = "1234";
+$userN = "admin";
+$pass = "t6Bnw9UYa";
+
+/*
+$userN = "admin";
+$pass = "t6Bnw9UYa";
+ */
 
 
 // Create connection

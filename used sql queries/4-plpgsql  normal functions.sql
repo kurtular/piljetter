@@ -1,3 +1,5 @@
+/*Several functions is created with "SECURITY DEFINER" to allow users to use the function and all the 
+inserts, updates, references and triggers inside the function*/
 
 --Function to cancel a concert.
 CREATE FUNCTION cancel_concert(concertId integer,give_vouchers boolean)
@@ -48,7 +50,7 @@ create_wallet(getUserId);
 END IF;
 END;
 $$
-LANGUAGE 'plpgsql';
+LANGUAGE 'plpgsql' SECURITY DEFINER;
 
 --Function to use to check total tickets sold in a period.
 CREATE FUNCTION  total_tickets_in_period(from_date timestamp(6) without time zone,to_date timestamp(6) without time zone)
@@ -107,7 +109,7 @@ END IF;
 END IF;
 END;
 $$
-LANGUAGE 'plpgsql';
+LANGUAGE 'plpgsql' SECURITY DEFINER;
 
 --Function to buy tickets with pesetas.
 CREATE FUNCTION  buy_tickets_with_pesetas(new_concert_id integer , new_user_id integer)
@@ -130,7 +132,7 @@ END IF;
 END IF;
 END;
    $$
-LANGUAGE 'plpgsql';
+LANGUAGE 'plpgsql' SECURITY DEFINER;
 
 --Function to buy pesetas
 CREATE or replace FUNCTION pesetas_charging_function(userid int,depositsek int)
@@ -143,7 +145,7 @@ INSERT INTO pesetas_charging (amount_pesetas,deposit_sek,user_id) VALUES
 UPDATE wallets SET balance = balance+toCharge WHERE wallets.user_id=userid;
 END;
 
-$$ language plpgsql;
+$$ language plpgsql SECURITY DEFINER;
 
 --function to get tickets
 CREATE or replace FUNCTION get_tickets(userid integer)
@@ -160,6 +162,6 @@ FROM users as u,
 artists as a, scenes as s, cities as ci, tickets as t,concerts as c
 WHERE t.user_id = u.user_id AND
 a.artist_id = c.artist_id AND s.scene_id = c.scene_id AND
-ci.city_id = s.city_id AND t.concert_id = c.concert_id AND t.user_id =$_SESSION[userId] ORDER BY c.date; 
+ci.city_id = s.city_id AND t.concert_id = c.concert_id AND t.user_id =userid ORDER BY c.date; 
 END;  $$
-LANGUAGE 'plpgsql';
+LANGUAGE 'plpgsql' SECURITY DEFINER;

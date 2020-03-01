@@ -1,16 +1,4 @@
---To show all concerts in customer page.
-SELECT c.concert_id,a.name AS artist_name,s.name AS scene_name,s.address,concat(ci.city,' , ',ci.country) AS city,c.date,c.time,c.ticket_price,c.remaining_tickets
-FROM concerts AS c,artists AS a,scenes AS s,cities AS ci 
-WHERE c.artist_id = a.artist_id AND c.scene_id = s.scene_id AND s.city_id= ci.city_id AND c.cancelled = false AND c.date+c.time > current_date+current_time ORDER BY c.date+c.time ASC;
-
---Searchbar querys.
-SELECT DISTINCT country FROM cities ORDER BY country
-SELECT DISTINCT city FROM cities ORDER BY city
-SELECT DISTINCT name FROM scenes ORDER BY name
-
---Buy tickets querys
-SELECT buy_tickets_with_voucher($_POST[itemId],$_SESSION[userId],$_POST[vouchId]);
-SELECT buy_tickets_with_pesetas($_POST[itemId],$_SESSION[userId]);
+--ADMIN
 
 --To show all concerts in admin page.
 SELECT c.concert_id,a.name AS artist_name,s.name AS scene_name,s.address,concat(ci.city,' , ',ci.country) AS city,c.date,c.time,c.ticket_price,c.remaining_tickets,c.cancelled,
@@ -21,38 +9,89 @@ SELECT c.concert_id,a.name AS artist_name,s.name AS scene_name,s.address,concat(
     FROM concerts AS c,artists AS a,scenes AS s,cities AS ci 
     WHERE c.artist_id = a.artist_id AND c.scene_id = s.scene_id AND s.city_id= ci.city_id $filter ORDER BY c.date+c.time ASC;
 
+--Show info about concert for admin
+SELECT * FROM concerts_profit_statistic WHERE concert_id= $_POST[overview]
+
 --Cancel concert
 SELECT cancel_concert($_POST[cancelCon],$_POST[extra])
-    
+
+--Create a new concert
+INSERT INTO concerts (artist_id,scene_id,date,time,remaining_tickets) 
+VALUES ('$_POST[artId]','$_POST[sceId]','$_POST[date]','$_POST[time]','$_POST[remTic]')
+
+--Selecting artists when creating concerts
+SELECT artist_id,CONCAT_WS(' ','id:',artist_id,'namn:',name,'popularitet:',popularity) AS value FROM artists ORDER BY name
+
+--Selecting cities when creating concerts
+SELECT city_id,CONCAT_WS(' ','id:',city_id,'city:',city,'country:',country) AS value FROM cities ORDER BY city
+
+--Selecting scenes when creating concerts
+SELECT scene_id,CONCAT_WS(' ','id:',s.scene_id,'namn:',s.name,'renommé:',s.rate,'capcitet:',s.capacity,'adress:',s.address,s.zip_code,(Select CONCAT_WS(' ','(',ci.city,ci.country,')') FROM cities AS ci WHere ci.city_id=s.city_id)) AS value FROM Scenes AS s ORDER BY s.name
+
+ --Add a new artist
+ INSERT INTO artists (name,popularity) VALUES ('$_POST[name]','$_POST[pop]')
+
+ --Add a new scene
+INSERT INTO scenes (name,rate,capacity,address,zip_code,city_id) VALUES
+ ('$_POST[name]','$_POST[rate]','$_POST[cap]','$_POST[address]','$_POST[zip]','$_POST[cityId]')
+
+--Add city
+INSERT INTO cities (city,country) VALUES ('$_POST[city]','$_POST[country]')
+
+--Create a new admin
+SELECT create_user('$_POST[uname]','$_POST[psw]','$_POST[fname]','$_POST[lname]','$_POST[email]','admin')
+
+--Get userinformation about admin
+SELECT concat(u.first_name,' ',u.last_name) AS NAME FROM users AS u WHERE u.user_id = $_SESSION[userId]
+
+--CUSTOMER
+
+--To show all concerts in customer page.
+SELECT c.concert_id,a.name AS artist_name,s.name AS scene_name,s.address,concat(ci.city,' , ',ci.country) AS city,c.date,c.time,c.ticket_price,c.remaining_tickets
+FROM concerts AS c,artists AS a,scenes AS s,cities AS ci 
+WHERE c.artist_id = a.artist_id AND c.scene_id = s.scene_id AND s.city_id= ci.city_id AND c.cancelled = false AND c.date+c.time > current_date+current_time ORDER BY c.date+c.time ASC;
+
+--Buy tickets querys
+SELECT buy_tickets_with_voucher($_POST[itemId],$_SESSION[userId],$_POST[vouchId]);
+SELECT buy_tickets_with_pesetas($_POST[itemId],$_SESSION[userId]);
+
 --To get user information (userid and balance).
 SELECT concat(u.first_name,' ',u.last_name) AS NAME,w.balance FROM users AS u,wallets AS w WHERE u.user_id=w.user_id AND u.user_id = $_SESSION[userId];
 
-/*--To get the tickets belonging to the active user.
-SELECT t.ticket_id,
-a.name AS artist_name, s.name AS scene_name, ci.city, ci.country, c.date, c.time, c.ticket_price,
-t.purchase_date,
-CASE
-WHEN t.ticket_id IN(select ticket_id from pesetas_tickets) THEN false
-WHEN t.ticket_id IN(select ticket_id from voucher_tickets) THEN true
-END AS vouchered
-FROM users as u,
-artists as a, scenes as s, cities as ci, tickets as t,concerts as c
-WHERE t.user_id = u.user_id AND
-a.artist_id = c.artist_id AND s.scene_id = c.scene_id AND
-ci.city_id = s.city_id AND t.concert_id = c.concert_id AND t.user_id = $_SESSION[userId] ORDER BY c.date;*/
+--To get the tickets belonging to the active user.
 SELECT * FROM get_tickets($_SESSION[userId]);
 
 --To get the vouchers belonging to the active user.
 SELECT voucher_id, issued_date, expire_date, used from vouchers WHERE vouchers.user_id = $_SESSION[userId];
 
---To get user_id and role when logging in.
-SELECT u.user_id,r.role FROM users AS u,roles as r WHERE r.role_id=u.role_id AND user_name='$userName' AND password='$password'
+--Create a new user
+SELECT create_user('$userName', '$password', '$firstName', '$lastName', '$email', '$customerRole')
 
 --Buy pesetas
---INSERT into pesetas_charging (user_id,deposit_sek) Values ($_SESSION[userId],$_POST[kronor]);
---new buy pesetas
 SELECT pesetas_charging_function($_SESSION[userId],$_POST[kronor]);
 
+--SEARCH
+SELECT DISTINCT country FROM cities ORDER BY country
+SELECT DISTINCT city FROM cities ORDER BY city
+SELECT DISTINCT name FROM scenes ORDER BY name
+
+--Adminsearch
+SELECT c.concert_id,a.name AS artist_name,s.name AS scene_name,s.address,concat(ci.city,' , ',ci.country) AS city,c.date,c.time,c.ticket_price,c.remaining_tickets,c.cancelled,
+    CASE 
+    WHEN c.date+c.time >= current_date+current_time then false
+    WHEN c.date+c.time < current_date+current_time then true
+    END AS passed
+    FROM concerts AS c,artists AS a,scenes AS s,cities AS ci 
+    WHERE c.artist_id = a.artist_id AND c.scene_id = s.scene_id AND s.city_id= ci.city_id $filter ORDER BY c.date+c.time ASC;
+
+--Custsearch
+SELECT c.concert_id,a.name AS artist_name,s.name AS scene_name,s.address,concat(ci.city,' , ',ci.country) AS city,c.date,c.time,c.ticket_price,c.remaining_tickets
+        FROM concerts AS c,artists AS a,scenes AS s,cities AS ci 
+        WHERE c.artist_id = a.artist_id AND c.scene_id = s.scene_id AND s.city_id= ci.city_id AND c.cancelled = false AND c.date+c.time > current_date+current_time $filter ORDER BY c.date+c.time ASC;
+
+--LOGIN
+--To get user_id and role when logging in.
+SELECT u.user_id,r.role FROM users AS u,roles as r WHERE r.role_id=u.role_id AND user_name='$userName' AND password='$password'
 
 
 

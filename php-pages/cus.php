@@ -56,6 +56,7 @@ while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
     $tickets{$i}->purchaseDate = $dateObj;
     $i++;
 }
+//Showing the vouchers
 $sql ="SELECT voucher_id, issued_date, expire_date, used from vouchers WHERE vouchers.user_id = $_SESSION[userId];";
 $stmt = $conn->prepare($sql);
 $stmt->execute();
