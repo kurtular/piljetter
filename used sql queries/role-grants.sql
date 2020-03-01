@@ -49,10 +49,6 @@ GRANT EXECUTE ON FUNCTION public.best_selling_artists(fromdate timestamp without
 
 GRANT EXECUTE ON FUNCTION public.cancel_concert(concertid integer, give_vouchers boolean) TO admin;
 
-GRANT EXECUTE ON FUNCTION public.total_income_in_period(from_date timestamp without time zone, to_date timestamp without time zone) TO admin;
-
-GRANT EXECUTE ON FUNCTION public.total_tickets_in_period(from_date timestamp without time zone, to_date timestamp without time zone) TO admin;
-
 GRANT EXECUTE ON FUNCTION public.calc_concert_spending() TO admin;
 
 GRANT EXECUTE ON FUNCTION public.calc_concert_ticket_price() TO admin;
@@ -60,8 +56,6 @@ GRANT EXECUTE ON FUNCTION public.calc_concert_ticket_price() TO admin;
 GRANT EXECUTE ON FUNCTION public.create_re_pesetas_tickets() TO admin;
 
 GRANT EXECUTE ON FUNCTION public.decrease_concert_remaining_tickets() TO admin;
-
-GRANT EXECUTE ON FUNCTION public.pesetas_charging() TO admin;
 
 GRANT EXECUTE ON FUNCTION public.refund_new_vouchers() TO admin;
 

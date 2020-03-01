@@ -90,4 +90,3 @@ $$ LANGUAGE plpgsql;
 --
 CREATE TRIGGER refund_new_vouchers_tr AFTER UPDATE OF cancelled ON concerts
 FOR EACH ROW EXECUTE PROCEDURE refund_new_vouchers();
-

@@ -117,7 +117,7 @@ END;
 LANGUAGE 'plpgsql' SECURITY DEFINER;
 
 --Function to buy pesetas
-CREATE or replace FUNCTION pesetas_charging_function(userid int,depositsek int)
+CREATE FUNCTION pesetas_charging_function(userid int,depositsek int)
 RETURNS VOID AS $$
 DECLARE
 toCharge real := (SELECT pesetas_exchanging(depositsek));
@@ -130,7 +130,7 @@ END;
 $$ language plpgsql SECURITY DEFINER;
 
 --function to get tickets
-CREATE or replace FUNCTION get_tickets(userid integer)
+CREATE FUNCTION get_tickets(userid integer)
 RETURNS  TABLE (ticket_id integer,artist_name varchar, scene_name varchar, city varchar,country varchar, "date" date, "time" time,ticket_price integer,purchase_date timestamp,vouchered boolean) AS $$
 BEGIN
 RETURN QUERY SELECT t.ticket_id,

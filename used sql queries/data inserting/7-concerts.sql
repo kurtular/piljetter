@@ -1,10 +1,12 @@
+/* Execute the following quieries in db-visualizer instead of pgadmin because it is possible to fail because of
+the concert date has already gone.*/
+
 insert into concerts (artist_id, scene_id, date, time, remaining_tickets) values (138, 611, '2020-07-28', '3:50 AM', 844);
 insert into concerts (artist_id, scene_id, date, time, remaining_tickets) values (154, 618, '2020-12-13', '6:02 AM', 067);
 insert into concerts (artist_id, scene_id, date, time, remaining_tickets) values (122, 829, '2020-11-26', '6:11 PM', 44);
 insert into concerts (artist_id, scene_id, date, time, remaining_tickets) values (134, 203, '2020-05-11', '7:57 PM', 547);
 insert into concerts (artist_id, scene_id, date, time, remaining_tickets) values (23, 875, '2020-11-28', '8:12 PM', 676);
 insert into concerts (artist_id, scene_id, date, time, remaining_tickets) values (50, 720, '2020-04-22', '10:16 AM', 549);
-insert into concerts (artist_id, scene_id, date, time, remaining_tickets) values (180, 361, '2020-11-14', '8:17 PM', 000);
 insert into concerts (artist_id, scene_id, date, time, remaining_tickets) values (4, 697, '2020-04-12', '4:16 AM', 714);
 insert into concerts (artist_id, scene_id, date, time, remaining_tickets) values (37, 866, '2020-06-28', '2:26 AM', 981);
 insert into concerts (artist_id, scene_id, date, time, remaining_tickets) values (186, 483, '2020-04-20', '1:09 PM', 325);
