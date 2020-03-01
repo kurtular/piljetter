@@ -1,7 +1,7 @@
 <?php
 header("Content-type: application/json; charset=utf-8");
 require '../php-parts/login-check.php';
-require '../php-parts/db-connection.php';
+//require '../php-parts/db-connection.php';
 require '../php-parts/obj.php';
 require '../php-parts/just-for-customer.php';
 if(isset($_POST["itemId"]) && $_POST["itemId"]!=""){
@@ -42,19 +42,8 @@ $stmt->execute();
 //should return just one row.
 $row = $stmt->fetch(PDO::FETCH_ASSOC);
 $user= new user($row['name'],$row['balance']);
-
-$sql ="SELECT t.ticket_id,
-a.name AS artist_name, s.name AS scene_name, ci.city, ci.country, c.date, c.time, c.ticket_price,
-t.purchase_date,
-CASE
-WHEN t.ticket_id IN(select ticket_id from pesetas_tickets) THEN false
-WHEN t.ticket_id IN(select ticket_id from voucher_tickets) THEN true
-END AS vouchered
-FROM users as u,
-artists as a, scenes as s, cities as ci, tickets as t,concerts as c
-WHERE t.user_id = u.user_id AND
-a.artist_id = c.artist_id AND s.scene_id = c.scene_id AND
-ci.city_id = s.city_id AND t.concert_id = c.concert_id AND t.user_id = $_SESSION[userId] ORDER BY c.date;";
+//Showing the tickets in customerpage
+$sql ="SELECT * FROM get_tickets($_SESSION[userId])";
 $stmt = $conn->prepare($sql);
 $stmt->execute();
 $tickets = array();

@@ -5,10 +5,6 @@ $db="piljetter";
 $userN = "postgres";
 $pass = "1234";
 
-/*customer
-$userN = "customer";
-$pass = "Um34Kx1bP";
-*/
 
 // Create connection
 $conn = new PDO('pgsql:host='.$servername.';dbname='.$db, $userN, $pass);

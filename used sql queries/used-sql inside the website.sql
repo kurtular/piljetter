@@ -27,7 +27,7 @@ SELECT cancel_concert($_POST[cancelCon],$_POST[extra])
 --To get user information (userid and balance).
 SELECT concat(u.first_name,' ',u.last_name) AS NAME,w.balance FROM users AS u,wallets AS w WHERE u.user_id=w.user_id AND u.user_id = $_SESSION[userId];
 
---To get the tickets belonging to the active user.
+/*--To get the tickets belonging to the active user.
 SELECT t.ticket_id,
 a.name AS artist_name, s.name AS scene_name, ci.city, ci.country, c.date, c.time, c.ticket_price,
 t.purchase_date,
@@ -39,7 +39,8 @@ FROM users as u,
 artists as a, scenes as s, cities as ci, tickets as t,concerts as c
 WHERE t.user_id = u.user_id AND
 a.artist_id = c.artist_id AND s.scene_id = c.scene_id AND
-ci.city_id = s.city_id AND t.concert_id = c.concert_id AND t.user_id = $_SESSION[userId] ORDER BY c.date;
+ci.city_id = s.city_id AND t.concert_id = c.concert_id AND t.user_id = $_SESSION[userId] ORDER BY c.date;*/
+SELECT * FROM get_tickets($_SESSION[userId]);
 
 --To get the vouchers belonging to the active user.
 SELECT voucher_id, issued_date, expire_date, used from vouchers WHERE vouchers.user_id = $_SESSION[userId];
@@ -48,7 +49,9 @@ SELECT voucher_id, issued_date, expire_date, used from vouchers WHERE vouchers.u
 SELECT u.user_id,r.role FROM users AS u,roles as r WHERE r.role_id=u.role_id AND user_name='$userName' AND password='$password'
 
 --Buy pesetas
-INSERT into pesetas_charging (user_id,deposit_sek) Values ($_SESSION[userId],$_POST[kronor]);
+--INSERT into pesetas_charging (user_id,deposit_sek) Values ($_SESSION[userId],$_POST[kronor]);
+--new buy pesetas
+SELECT pesetas_charging_function($_SESSION[userId],$_POST[kronor]);
 
 
 

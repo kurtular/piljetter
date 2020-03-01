@@ -144,3 +144,22 @@ UPDATE wallets SET balance = balance+toCharge WHERE wallets.user_id=userid;
 END;
 
 $$ language plpgsql;
+
+--function to get tickets
+CREATE or replace FUNCTION get_tickets(userid integer)
+RETURNS  TABLE (ticket_id integer,artist_name varchar, scene_name varchar, city varchar,country varchar, "date" date, "time" time,ticket_price integer,purchase_date timestamp,vouchered boolean) AS $$
+BEGIN
+RETURN QUERY SELECT t.ticket_id,
+a.name AS artist_name, s.name AS scene_name, ci.city, ci.country, c.date, c.time, c.ticket_price,
+t.purchase_date,
+CASE
+WHEN t.ticket_id IN(select pesetas_tickets.ticket_id from pesetas_tickets) THEN false
+WHEN t.ticket_id IN(select voucher_tickets.ticket_id from voucher_tickets) THEN true
+END AS vouchered
+FROM users as u,
+artists as a, scenes as s, cities as ci, tickets as t,concerts as c
+WHERE t.user_id = u.user_id AND
+a.artist_id = c.artist_id AND s.scene_id = c.scene_id AND
+ci.city_id = s.city_id AND t.concert_id = c.concert_id AND t.user_id =$_SESSION[userId] ORDER BY c.date; 
+END;  $$
+LANGUAGE 'plpgsql';
